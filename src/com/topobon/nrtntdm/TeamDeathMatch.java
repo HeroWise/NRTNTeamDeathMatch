@@ -1,11 +1,11 @@
 package com.topobon.nrtntdm;
 
 import java.util.ArrayList;
-
 import org.bukkit.entity.Player;
 
 public class TeamDeathMatch {
-	private boolean isGameOn;
+	private boolean isGameOn; // Need to set
+	private int totalNumberOfPoints; // Need to set
 	private ArrayList<Player> teamRed = new ArrayList<Player>();
 	private ArrayList<Player> teamBlue = new ArrayList<Player>();
 
@@ -23,12 +23,12 @@ public class TeamDeathMatch {
 
 	}
 
-	public void removePlayerInBlueTeam() {
-
+	public void removePlayerInBlueTeam(Player player) {
+		teamBlue.remove(player);
 	}
 
-	public void removePlayerInRedTeam() {
-
+	public void removePlayerInRedTeam(Player player) {
+		teamRed.remove(player);
 	}
 
 	public Boolean isGameRunning() {
@@ -46,5 +46,11 @@ public class TeamDeathMatch {
 	public void stopGame() {
 		setGameRunning(false);
 
+	}
+	public Integer getPoints(){
+		return totalNumberOfPoints;
+	}
+	public void setPoints(int numberOfPoints){
+		totalNumberOfPoints = numberOfPoints;
 	}
 }
