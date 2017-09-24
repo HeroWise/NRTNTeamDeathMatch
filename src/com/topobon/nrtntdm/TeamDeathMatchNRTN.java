@@ -29,7 +29,10 @@
  */
 package com.topobon.nrtntdm;
 
+import java.util.ArrayList;
+
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -54,6 +57,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class TeamDeathMatchNRTN extends JavaPlugin {
 	private static Logo logo; // Logo object
+	
 	private static final Logo TEAHM_DEATH_MATCH_INITIALS = logo;
 
 	/**
@@ -69,6 +73,7 @@ public class TeamDeathMatchNRTN extends JavaPlugin {
 	 * <li>Register Commands
 	 */
 	public void onEnable() {
+		
 		setLogo(ChatColor.translateAlternateColorCodes('&', "&7&l[&6&lNaruto &c&lRTN&7&l] &r"));
 		/**
 		 * Talks about the TDM plugin and its state
@@ -79,13 +84,20 @@ public class TeamDeathMatchNRTN extends JavaPlugin {
 		System.out.println(logo.getLogo() + "TEAM DEATH MATCH Plugin is ready to be used!");
 
 	}
+	
+	
 	/**
 	 * 
 	 * @return Logo Object to #getLogo()  
 	 */
-	public static void getInitials(){
-		TEAHM_DEATH_MATCH_INITIALS.getLogo();
+	public static String getInitials(){
+		return TEAHM_DEATH_MATCH_INITIALS.getLogo();
 	}
+	
+	/**
+	 * 
+	 * @param string - to set Logo
+	 */
 	public void setLogo(String string){
 		logo = new Logo(string);
 	}
