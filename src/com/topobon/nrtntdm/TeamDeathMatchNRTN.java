@@ -69,8 +69,7 @@ public class TeamDeathMatchNRTN extends JavaPlugin {
 	 * <li>Register Commands
 	 */
 	public void onEnable() {
-		// Setting logo for Team Death Match
-		logo = new Logo(ChatColor.translateAlternateColorCodes('&', "&7&l[&6&lNaruto &c&lRTN&7&l] &r"));
+		setLogo(ChatColor.translateAlternateColorCodes('&', "&7&l[&6&lNaruto &c&lRTN&7&l] &r"));
 		/**
 		 * Talks about the TDM plugin and its state
 		 * 
@@ -87,4 +86,8 @@ public class TeamDeathMatchNRTN extends JavaPlugin {
 	public static void getInitials(){
 		TEAHM_DEATH_MATCH_INITIALS.getLogo();
 	}
+	public void setLogo(String string){
+		logo = new Logo(string);
+	}
+	
 }
