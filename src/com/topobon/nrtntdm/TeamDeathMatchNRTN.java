@@ -90,7 +90,9 @@ public class TeamDeathMatchNRTN extends JavaPlugin {
 		
 	}
 	/**
-	 * 
+	 * Method: returns logo Object and calls #getLogo() 
+	 * Method from the {@linkplain Logo.class}
+	 *  
 	 * @return Logo Object to #getLogo()  
 	 */
 	public static String getInitials(){

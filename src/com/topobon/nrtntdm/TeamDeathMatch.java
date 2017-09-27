@@ -28,20 +28,61 @@
  */
 package com.topobon.nrtntdm;
 
+/**
+ * <b>Team Death Match Extreme - NRTN </b>
+ * <p>
+ * This plugin was created by @HeroWise and allows you to create a TDM
+ * simulation
+ * <p>
+ * You are welcome to use it or redistribute it under the following conditions:
+ * <ul>
+ * <li>Don't claim these classes or the whole as your own
+ * <li>Tell the author before distributing
+ * <li>Ask permission from server owner of NRTN
+ * <li>Don't remove this disclaimer
+ * </ul>
+ * <i>It would be nice if you provide credit to me if you use this class or
+ * plugin in a published / a already created project</i>
+ * 
+ * @author HeroWise
+ * @version 1.10
+ * 
+ */
 import java.util.ArrayList;
 import org.bukkit.entity.Player;
 import org.bukkit.event.hanging.HangingBreakEvent.RemoveCause;
 
+/**
+ * <b>TeamDeathMatch </b>
+ * <p>
+ * This plugin was created by @HeroWise and allows you to create a TDM
+ * simulation
+ * <p>
+ * You are welcome to use it or redistribute it under the following conditions:
+ * <ul>
+ * <li>Don't claim these classes or the whole as your own
+ * <li>Tell the author before distributing
+ * <li>Ask permission from server owner of NRTN
+ * <li>Don't remove this disclaimer
+ * </ul>
+ * <i>It would be nice if you provide credit to me if you use this class or
+ * plugin in a published / a already created project</i>
+ * 
+ * @author HeroWise
+ * @version 1.10
+ * 
+ */
 public class TeamDeathMatch {
 	private static boolean isGameOn; // Need to set
 	private static int totalNumberOfPoints; // Need to set
-	private static int numberOfTeamRedPoints; 
+	private static int numberOfTeamRedPoints;
 	private static int numberOfTeamBluePoints;
 	private static ArrayList<Player> teamRed = new ArrayList<Player>();
 	private static ArrayList<Player> teamBlue = new ArrayList<Player>();
 
 	/**
-	 * Clears every players in Team Red and Team Blue
+	 * <b> Clear All Team <b>
+	 * Method: Clears every players in Team Red and Team Blue
 	 */
 	public static void clearAllTeams() {
 		teamRed.clear();
@@ -49,7 +90,8 @@ public class TeamDeathMatch {
 	}
 
 	/**
-	 * Adds a player in Blue Team
+	 * <b> Add player in Blue Team <b>
+	 * Method: Adds a player in Blue Team
 	 * 
 	 * @param player
 	 */
@@ -58,7 +100,8 @@ public class TeamDeathMatch {
 	}
 
 	/**
-	 * Adds a player in Red Team
+	 * <b> Add player in Red Team <b>
+	 * Method: Adds a player in Red Team
 	 * 
 	 * @param player
 	 */
@@ -67,43 +110,81 @@ public class TeamDeathMatch {
 	}
 
 	/**
-	 * Returns instance of Team Red Arraylist
+	 * <b> List players in Red Team <b>
+	 * Method: Returns instance of Team Red Arraylist
 	 * 
 	 * @return Arraylist<Player> teamRed
 	 */
 	public static ArrayList<Player> getPlayersInRedTeam() {
 		return teamRed;
 	}
+
 	/**
-	 * Returns instance of Team Blue ArrayList
-	 * @return  Arraylist<Player> teamBlue
+	 * Method: Returns instance of Team Blue ArrayList
+	 * 
+	 * @return Arraylist<Player> teamBlue
 	 */
 	public static ArrayList<Player> getPlayersInBlueTeam() {
 		return teamBlue;
 	}
 
+	/**
+	 * Method: Removes given player from Blue Team
+	 * 
+	 * @param player
+	 */
 	public void removePlayerInBlueTeam(Player player) {
 		teamBlue.remove(player);
 	}
 
+	/**
+	 * Method: Removes given player from Red Team
+	 * 
+	 * @param player
+	 */
 	public void removePlayerInRedTeam(Player player) {
 		teamRed.remove(player);
 	}
 
+	/**
+	 * Method: Returns the Game Running state
+	 * 
+	 * @return isGameOn Boolean
+	 */
 	public static Boolean isGameRunning() {
 		return isGameOn;
 	}
 
+	/**
+	 * Method: Sets the Game Runining state
+	 * @param gameOn to set Boolean isGameOn
+	 */
 	public static void setGameRunning(boolean gameOn) {
 		isGameOn = gameOn;
 	}
-
+	/**
+	 * <b> Starts game <b>
+	 * Method: The Methods it triggers are: <ul>
+	 * <li> setGameRunning() = @param (Boolean) -setting game to TRUE which starts the GAME
+	 * <li> clearAllTeams() = clears team red and team blue players (ArrayList<Player>)
+	 * <li> resetAllTeamPoints() = resets accumulated team points for both teams - sets them to '0'
+	 * <ul>
+	 * 
+	 */
 	public static void startGame() {
 		setGameRunning(true);
 		clearAllTeams();
 		resetAllTeamPoints();
 	}
-
+	/**
+	 * <b> Stops game <b>
+	 * Method: The Methods it triggers are: <ul>
+	 * <li> setGameRunning() = @param (Boolean) -setting game to FALSE which stops the GAME 
+	 * <li> clearAllTeams() = clears team red and team blue players (ArrayList<Player>)
+	 * <li> resetAllTeamPoints() = resets accumulated team points for both teams - sets them to '0'
+	 * <ul>
+	 * 
+	 */
 	public static void stopGame() {
 		setGameRunning(false);
 		clearAllTeams();
