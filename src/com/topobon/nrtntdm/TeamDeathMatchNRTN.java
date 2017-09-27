@@ -38,27 +38,26 @@ import com.topobon.nrtntdm.commands.TeamDeathMatchNRTNCommands;
 /**
  * <b>Team Death Match Extreme - NRTN </b>
  * <p>
- * This plugin was created by @HeroWise and allows you to create a TDM
- * simulation
+ * This class is the Main class which @extends {@link - JavaPlugin}
  * <p>
- * You are welcome to use it or redistribute it under the following conditions:
+ * The main purpose of this class is to:
  * <ul>
- * <li>Don't claim these classes or the whole as your own
- * <li>Tell the author before distributing
- * <li>Ask permission from server owner of NRTN
- * <li>Don't remove this disclaimer
+ * <li>Hold a custom class called Logo which holds Logo Object and make a new Initial / Chevron
+ * <li>Registers Commands 
+ * <li>Registers Events
  * </ul>
+ * 
  * <i>It would be nice if you provide credit to me if you use this class or
  * plugin in a published / a already created project</i>
  * 
  * @author HeroWise
- * @version 1.10
+ * @version HW1.2_0TDMNRTN (Plugin Version)
+ * @version 1.10 (MInecraft Server Version)
  * 
  */
 public class TeamDeathMatchNRTN extends JavaPlugin {
 	private static Logo logo; // Logo object
-	
-	private static final Logo TEAHM_DEATH_MATCH_INITIALS = logo;
+
 
 	/**
 	 * Method: Calls when class runs {@link #getPluginLoader()}
@@ -82,13 +81,11 @@ public class TeamDeathMatchNRTN extends JavaPlugin {
 		System.out.println(logo.getLogo() + "TEAM DEATH MATCH Plugin has been deployed");
 		System.out.println(logo.getLogo() + "Initiating Server Sequence....");
 		System.out.println(logo.getLogo() + "TEAM DEATH MATCH Plugin is ready to be used!");
+		// Registering Commands
 		this.getCommand("tdm").setExecutor(new TeamDeathMatchNRTNCommands(this));
+		// Registering Events
 	}
 	
-	public void setGameInfo(){
-		//Location is set in the Location Manager Class
-		
-	}
 	/**
 	 * Method: returns logo Object and calls #getLogo() 
 	 * Method from the {@linkplain Logo.class}
@@ -96,14 +93,15 @@ public class TeamDeathMatchNRTN extends JavaPlugin {
 	 * @return Logo Object to #getLogo()  
 	 */
 	public static String getInitials(){
-		return TEAHM_DEATH_MATCH_INITIALS.getLogo();
+		
+		return logo.getLogo();
 	}
 	
 	/**
 	 * 
 	 * @param string - to set Logo
 	 */
-	public void setLogo(String string){
+	public static void setLogo(String string){
 		logo = new Logo(string);
 	}
 	

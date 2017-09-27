@@ -37,7 +37,7 @@ public class TDMLocation {
 		player.teleport(LocationManager.getLocationForTeamRed());
 	}
 	public static void teleportPlayerToTeamBlueSpawn(Player player) {
-		player.teleport(LocationManager.getLocationForTeamRed());
+		player.teleport(LocationManager.getLocationForTeamBlue());
 		
 	}
 }

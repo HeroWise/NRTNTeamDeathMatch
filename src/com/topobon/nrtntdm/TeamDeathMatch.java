@@ -190,31 +190,65 @@ public class TeamDeathMatch {
 		clearAllTeams();
 		resetAllTeamPoints();
 	}
-
+	/**
+	 * <b> Get Total Points <b>
+	 * Method: get Total Points for players to win
+	 * 
+	 * @return totalNumberOfPoints (Integer)
+	 */
 	public static Integer getTotalPoints() {
 		return totalNumberOfPoints;
 	}
-
+	/**
+	 * <b> Set Total Points <b>
+	 * Method: Sets the total points foe teams to win
+	 * 
+	 * @sets totalNumberOfPoints from @param numberOfPoints (Integer)
+	 */
 	public static void setTotalPoints(int numberOfPoints) {
 		totalNumberOfPoints = numberOfPoints;
 	}
-
+	/**
+	 * <b> Get Points scored by Red Team <b>
+	 * Method: Get points, which are earned by kills,  
+	 * @return numberOfTeamRedPoints (Integer)
+	 */
 	public static Integer getRedPoints() {
 		return numberOfTeamRedPoints;
 	}
-
+	/**
+	 * <b> Get Points scored by Blue Team <b>
+	 * Method: Get points, which are earned by kills,  
+	 * @return numberOfTeamBluePoints (Integer)
+	 */
 	public static Integer getBluePoints() {
 		return numberOfTeamBluePoints;
 	}
-
+	/**
+	 * <b> Set Points scored by Red Team <b>
+	 * Method: Get points, which are earned by kills,  
+	 * @return numberOfTeamRedPoints = @param numberOfPoints (Integer)
+	 */
 	public static void setRedPoints(int numberOfPoints) {
 		numberOfTeamRedPoints = numberOfPoints;
 	}
-
+	/**
+	 * <b> Set Points scored by Blue Team <b>
+	 * Method: Get points, which are earned by kills,  
+	 * @return numberOfTeamBluePoints = @param numberOfPoints (Integer)
+	 */
 	public static void setBluePoints(int numberOfPoints) {
 		numberOfTeamBluePoints = numberOfPoints;
 	}
-
+	/**
+	 * <b> Reset All Points <b>
+	 * Method: The Methods it triggers are: 
+	 * <ul>
+	 * <li> setRedPoints() = @param (Integer) - setting points to 0 for Blue Team
+	 * <li> setBluePoints() = @param (Integer) - setting points to 0 for Blue Team 
+	 * <ul>
+	 * 
+	 */
 	public static void resetAllTeamPoints() {
 		setRedPoints(0);
 		setBluePoints(0);

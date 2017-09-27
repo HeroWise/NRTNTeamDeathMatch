@@ -38,20 +38,20 @@ public class LocationManager {
 	public static Location teamBlueSpawn;
 	//TODO Change location
 	public static Location getLocationForTeamRed() {
-		double x = 3603;
-		double y = 55;
-		double z = -4158;
-
-		return new Location(Bukkit.getWorld("Naruto"), x, y, z);
+		double x = -708;
+		double y = 4;
+		double z = 171;
+		teamRedSpawn = new Location(Bukkit.getWorld("world"), x, y, z);
+		return teamRedSpawn;
 	}
 
 	public static Location getLocationForTeamBlue() {
 
-		double x = 3603;
-		double y = 55;
-		double z = -4158;
-
-		return new Location(Bukkit.getWorld("Naruto"), x, y, z);
+		double x = -708;
+		double y = 4;
+		double z = 102;
+		teamBlueSpawn = new Location(Bukkit.getWorld("world"), x, y, z);
+		return teamBlueSpawn;
 	}
 
 }

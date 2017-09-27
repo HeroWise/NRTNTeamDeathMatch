@@ -31,23 +31,51 @@ package com.topobon.nrtntdm.gameprocessing;
 
 import org.bukkit.entity.Player;
 
+
 import com.topobon.nrtntdm.TeamDeathMatch;
+import com.topobon.nrtntdm.TeamDeathMatchNRTN;
 import com.topobon.nrtntdm.arena.TDMLocation;
+
 import com.topobon.nrtntdm.utils.Utility;
 
 public class QueueProcess {
+	
+	static TeamDeathMatchNRTN instance;
+
+	public QueueProcess(TeamDeathMatchNRTN instance) {
+		this.instance = instance;
+	}
 
 	public static void setPlayerInQueue(Player player) {
-			
+		for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
+			if (player.equals(p)) {
+				player.sendMessage(Utility.messageToPlayer("&4You are already in &c&lRed&4 Team!"));
+
+		
+				return;
+
+			}
+		}
+		for (Player p : TeamDeathMatch.getPlayersInBlueTeam()) {
+			if (player.equals(p)) {
+				player.sendMessage(Utility.messageToPlayer("&4You are already in &b&lBlue&4 Team!"));
+				return;
+			}
+		}
 		if (TeamDeathMatch.getPlayersInRedTeam().size() >= TeamDeathMatch.getPlayersInBlueTeam().size()) {
-			
+
 			TeamDeathMatch.addPlayerInBlueTeam(player);
-			player.sendMessage(Utility.messageToPlayer("You have joined Blue Team!"));
+			player.sendMessage(Utility.messageToPlayer("&aYou have joined &b&lBlue&a Team!"));
 			TDMLocation.teleportPlayerToTeamBlueSpawn(player);
+
+			
 		} else {
 			TeamDeathMatch.addPlayerInRedTeam(player);
-			player.sendMessage(Utility.messageToPlayer("You have joined Red Team!"));
+			player.sendMessage(Utility.messageToPlayer("&aYou have joined &c&lRed&a Team!"));
 			TDMLocation.teleportPlayerToTeamRedSpawn(player);
+			
+			// BarAPI.setMessage(player, "Time Left till Team Death Match Ends",
+			// 15 /* minutes*/ * 60);
 		}
 	}
 
