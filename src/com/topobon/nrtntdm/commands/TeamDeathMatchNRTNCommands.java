@@ -29,18 +29,20 @@
  */
 package com.topobon.nrtntdm.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-
 import com.topobon.nrtntdm.TeamDeathMatch;
 import com.topobon.nrtntdm.TeamDeathMatchNRTN;
+import com.topobon.nrtntdm.gameprocessing.GameManager;
 import com.topobon.nrtntdm.gameprocessing.QueueProcess;
 import com.topobon.nrtntdm.utils.Utility;
 
 import me.confuser.barapi.BarAPI;
+import me.winterguardian.easyscoreboards.ScoreboardUtil;
 
 public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 	TeamDeathMatchNRTN instance;
@@ -56,6 +58,8 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("tdm")) {
 			if (args.length == 0) {
 				CommandSender player = sender;
+
+				// Integer only!
 				player.sendMessage(Utility.messageToPlayer(("&8&m========&b&lTeamDeathMatch&8&m========")));
 				player.sendMessage(Utility.messageToPlayer("&7/&c&lchuunin &8- &astart"));
 				player.sendMessage(Utility.messageToPlayer("&7/&c&lchuunin &8- &astop"));
@@ -67,11 +71,12 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 
 				if (args[0].equalsIgnoreCase("start") && (!TeamDeathMatch.isGameRunning())) {
 					TeamDeathMatch.startGame();
+					TeamDeathMatch.setTotalPoints(2); // SET POINTS FOR GAME
 					sender.sendMessage(Utility.messageToPlayer("&aTeam Death Match has started!"));
 					/**
 					 * Setting Timer in minutes
 					 */
-					startTimer(1); // Setting TImer value
+					startTimer(3); // Setting TImer value
 
 					return true;
 				}
@@ -79,7 +84,7 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 					TeamDeathMatch.stopGame();
 					sender.sendMessage(Utility.messageToPlayer("&aTeam Death Match has stopped!"));
 					return true;
-				}
+				} 
 				if (args[0].equalsIgnoreCase("join") && (TeamDeathMatch.isGameRunning()) && sender instanceof Player) {
 					Player pSender = (Player) sender;
 					QueueProcess.setPlayerInQueue(pSender);
@@ -91,55 +96,89 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 		}
 		return true;
 	}
+
 	/**
 	 * 
 	 * @param seconds
 	 * @return
 	 */
 	String convertSeconds(int seconds) {
-    int h = seconds/ 3600;
-    int m = (seconds % 3600) / 60;
-    int s = seconds % 60;
-    String sh = (h > 0 ? String.valueOf(h) + " " + "h" : "");
-    String sm = (m < 10 && m > 0 && h > 0 ? "0" : "") + (m > 0 ? (h > 0 && s == 0 ? String.valueOf(m) : String.valueOf(m) + " " + "min") : "");
-    String ss = (s == 0 && (h > 0 || m > 0) ? "" : (s < 10 && (h > 0 || m > 0) ? "0" : "") + String.valueOf(s) + " " + "s");
-    return sh + (h > 0 ? " " : "") + sm + (m > 0 ? " " : "") + ss;
-}
-
+		int h = seconds / 3600;
+		int m = (seconds % 3600) / 60;
+		int s = seconds % 60;
+		String sh = (h > 0 ? String.valueOf(h) + " " + "h" : "");
+		String sm = (m < 10 && m > 0 && h > 0 ? "0" : "")
+				+ (m > 0 ? (h > 0 && s == 0 ? String.valueOf(m) : String.valueOf(m) + " " + "min") : "");
+		String ss = (s == 0 && (h > 0 || m > 0) ? ""
+				: (s < 10 && (h > 0 || m > 0) ? "0" : "") + String.valueOf(s) + " " + "s");
+		return sh + (h > 0 ? " " : "") + sm + (m > 0 ? " " : "") + ss;
+	}
 
 	public void startTimer(int minutes) {
 		numberOfSeconds = minutes * 60;
 		new BukkitRunnable() {
-			
+
 			@Override
 			public void run() {
 
 				for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
 					int seconds = numberOfSeconds;
 					String duration = convertSeconds(seconds);
-					BarAPI.setMessage(p,
-							Utility.decodeMessage("&cTime Left till Team Death Match Ends in &a" + duration+""), 2);
+					BarAPI.setMessage(p, Utility.decodeMessage("&cTeam Death Match Ends in &a" + duration + ""), 2);
 
 				}
 				for (Player p : TeamDeathMatch.getPlayersInBlueTeam()) {
 					int seconds = numberOfSeconds;
 					String duration = convertSeconds(seconds);
-					BarAPI.setMessage(p,
-							Utility.decodeMessage("&bTime Left till Team Death Match Ends in &a" + duration+""), 2);
+					BarAPI.setMessage(p, Utility.decodeMessage("&bTeam Death Match Ends in &a" + duration + ""), 2);
 				}
-			
+				for(Player p : Bukkit.getOnlinePlayers()){
+					if(TeamDeathMatch.getPlayersInRedTeam().contains(p)){
+						ScoreboardUtil.unrankedSidebarDisplay(p,
+								new String[] { Utility.decodeMessage("&c&lTeam Death Match"),
+										Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
+										Utility.decodeMessage("&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
+										Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills().get(p)),
+										Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(p)),
+										Utility.decodeMessage("&8&m&l----------") });
+					} 
+					else if(TeamDeathMatch.getPlayersInBlueTeam().contains(p)) {
+						ScoreboardUtil.unrankedSidebarDisplay(p,
+								new String[] { Utility.decodeMessage("&b&lTeam Death Match"),
+										Utility.decodeMessage("&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
+										Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
+										Utility.decodeMessage("&0|&aKills&7:&4 " +  TeamDeathMatch.getIndividualPlayerKills().get(p)),
+										Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(p)),
+										Utility.decodeMessage("&8&m&l----------") });
+					}
+				}
+				
 				numberOfSeconds--;
-
-				if (numberOfSeconds == 0) {
+				if (GameManager.checkIfGameWon()) {
 					this.cancel();
+
 					for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
 						BarAPI.removeBar(p);
+						ScoreboardUtil.unrankedSidebarDisplay(p, new String[] {});
 					}
 					for (Player p : TeamDeathMatch.getPlayersInBlueTeam()) {
 						BarAPI.removeBar(p);
+						ScoreboardUtil.unrankedSidebarDisplay(p, new String[] {});
 					}
-					
-					// GAMEWON
+				}
+				if (numberOfSeconds == 0) {
+					this.cancel();
+
+					for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
+						BarAPI.removeBar(p);
+						ScoreboardUtil.unrankedSidebarDisplay(p, new String[] {});
+					}
+					for (Player p : TeamDeathMatch.getPlayersInBlueTeam()) {
+						BarAPI.removeBar(p);
+						ScoreboardUtil.unrankedSidebarDisplay(p, new String[] {});
+					}
+
+					GameManager.selectWinningTeam();
 				}
 
 			}

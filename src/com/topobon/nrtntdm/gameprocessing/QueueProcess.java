@@ -30,20 +30,21 @@
 package com.topobon.nrtntdm.gameprocessing;
 
 import org.bukkit.entity.Player;
-
-
 import com.topobon.nrtntdm.TeamDeathMatch;
 import com.topobon.nrtntdm.TeamDeathMatchNRTN;
 import com.topobon.nrtntdm.arena.TDMLocation;
 
 import com.topobon.nrtntdm.utils.Utility;
 
+import me.winterguardian.easyscoreboards.ScoreboardUtil;
+
 public class QueueProcess {
-	
-	static TeamDeathMatchNRTN instance;
+
+	TeamDeathMatchNRTN instance;
 
 	public QueueProcess(TeamDeathMatchNRTN instance) {
 		this.instance = instance;
+
 	}
 
 	public static void setPlayerInQueue(Player player) {
@@ -51,7 +52,6 @@ public class QueueProcess {
 			if (player.equals(p)) {
 				player.sendMessage(Utility.messageToPlayer("&4You are already in &c&lRed&4 Team!"));
 
-		
 				return;
 
 			}
@@ -63,17 +63,36 @@ public class QueueProcess {
 			}
 		}
 		if (TeamDeathMatch.getPlayersInRedTeam().size() >= TeamDeathMatch.getPlayersInBlueTeam().size()) {
-
+			
+			TeamDeathMatch.setIndividualPlayerKills(player, 0);
+			TeamDeathMatch.setIndividualPlayerDeaths(player, 0);
+			ScoreboardUtil.unrankedSidebarDisplay(player,
+					new String[] { Utility.decodeMessage("&b&lTeam Death Match"),
+							Utility.decodeMessage("&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
+							Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
+							Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills()),
+							Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths()),
+							Utility.decodeMessage("&8&m&l----------") });
 			TeamDeathMatch.addPlayerInBlueTeam(player);
 			player.sendMessage(Utility.messageToPlayer("&aYou have joined &b&lBlue&a Team!"));
 			TDMLocation.teleportPlayerToTeamBlueSpawn(player);
+			//player.setBedSpawnLocation(LocationManager.teamBlueSpawn);
 
-			
 		} else {
+			TeamDeathMatch.setIndividualPlayerKills(player, 0);
+			TeamDeathMatch.setIndividualPlayerDeaths(player, 0);
+			ScoreboardUtil.unrankedSidebarDisplay(player,
+					new String[] { Utility.decodeMessage("&c&lTeam Death Match"),
+							Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
+							Utility.decodeMessage("&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
+							Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills()),
+							Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths()),
+							Utility.decodeMessage("&8&m&l----------") });
+			
 			TeamDeathMatch.addPlayerInRedTeam(player);
 			player.sendMessage(Utility.messageToPlayer("&aYou have joined &c&lRed&a Team!"));
 			TDMLocation.teleportPlayerToTeamRedSpawn(player);
-			
+		//	player.setBedSpawnLocation(LocationManager.teamRedSpawn);
 			// BarAPI.setMessage(player, "Time Left till Team Death Match Ends",
 			// 15 /* minutes*/ * 60);
 		}

@@ -49,8 +49,8 @@ package com.topobon.nrtntdm;
  * 
  */
 import java.util.ArrayList;
+import java.util.HashMap;
 import org.bukkit.entity.Player;
-import org.bukkit.event.hanging.HangingBreakEvent.RemoveCause;
 
 /**
  * <b>TeamDeathMatch </b>
@@ -79,10 +79,12 @@ public class TeamDeathMatch {
 	private static int numberOfTeamBluePoints;
 	private static ArrayList<Player> teamRed = new ArrayList<Player>();
 	private static ArrayList<Player> teamBlue = new ArrayList<Player>();
+	private static HashMap<Player, Integer> playerKills = new HashMap<>();
+	private static HashMap<Player, Integer> playerDeaths = new HashMap<>();
 
 	/**
-	 * <b> Clear All Team <b>
-	 * Method: Clears every players in Team Red and Team Blue
+	 * <b> Clear All Team <b> Method: Clears every players in Team Red and Team
+	 * Blue
 	 */
 	public static void clearAllTeams() {
 		teamRed.clear();
@@ -90,8 +92,7 @@ public class TeamDeathMatch {
 	}
 
 	/**
-	 * <b> Add player in Blue Team <b>
-	 * Method: Adds a player in Blue Team
+	 * <b> Add player in Blue Team <b> Method: Adds a player in Blue Team
 	 * 
 	 * @param player
 	 */
@@ -100,8 +101,7 @@ public class TeamDeathMatch {
 	}
 
 	/**
-	 * <b> Add player in Red Team <b>
-	 * Method: Adds a player in Red Team
+	 * <b> Add player in Red Team <b> Method: Adds a player in Red Team
 	 * 
 	 * @param player
 	 */
@@ -110,8 +110,8 @@ public class TeamDeathMatch {
 	}
 
 	/**
-	 * <b> List players in Red Team <b>
-	 * Method: Returns instance of Team Red Arraylist
+	 * <b> List players in Red Team <b> Method: Returns instance of Team Red
+	 * Arraylist
 	 * 
 	 * @return Arraylist<Player> teamRed
 	 */
@@ -157,17 +157,23 @@ public class TeamDeathMatch {
 
 	/**
 	 * Method: Sets the Game Runining state
-	 * @param gameOn to set Boolean isGameOn
+	 * 
+	 * @param gameOn
+	 *            to set Boolean isGameOn
 	 */
 	public static void setGameRunning(boolean gameOn) {
 		isGameOn = gameOn;
 	}
+
 	/**
-	 * <b> Starts game <b>
-	 * Method: The Methods it triggers are: <ul>
-	 * <li> setGameRunning() = @param (Boolean) -setting game to TRUE which starts the GAME
-	 * <li> clearAllTeams() = clears team red and team blue players (ArrayList<Player>)
-	 * <li> resetAllTeamPoints() = resets accumulated team points for both teams - sets them to '0'
+	 * <b> Starts game <b> Method: The Methods it triggers are:
+	 * <ul>
+	 * <li>setGameRunning() = @param (Boolean) -setting game to TRUE which
+	 * starts the GAME
+	 * <li>clearAllTeams() = clears team red and team blue players
+	 * (ArrayList<Player>)
+	 * <li>resetAllTeamPoints() = resets accumulated team points for both teams
+	 * - sets them to '0'
 	 * <ul>
 	 * 
 	 */
@@ -175,13 +181,19 @@ public class TeamDeathMatch {
 		setGameRunning(true);
 		clearAllTeams();
 		resetAllTeamPoints();
+		getIndividualPlayerKills().clear();
+		getIndividualPlayerDeaths().clear();
 	}
+
 	/**
-	 * <b> Stops game <b>
-	 * Method: The Methods it triggers are: <ul>
-	 * <li> setGameRunning() = @param (Boolean) -setting game to FALSE which stops the GAME 
-	 * <li> clearAllTeams() = clears team red and team blue players (ArrayList<Player>)
-	 * <li> resetAllTeamPoints() = resets accumulated team points for both teams - sets them to '0'
+	 * <b> Stops game <b> Method: The Methods it triggers are:
+	 * <ul>
+	 * <li>setGameRunning() = @param (Boolean) -setting game to FALSE which
+	 * stops the GAME
+	 * <li>clearAllTeams() = clears team red and team blue players
+	 * (ArrayList<Player>)
+	 * <li>resetAllTeamPoints() = resets accumulated team points for both teams
+	 * - sets them to '0'
 	 * <ul>
 	 * 
 	 */
@@ -189,69 +201,98 @@ public class TeamDeathMatch {
 		setGameRunning(false);
 		clearAllTeams();
 		resetAllTeamPoints();
+		getIndividualPlayerKills().clear();
+		getIndividualPlayerDeaths().clear();
 	}
+
 	/**
-	 * <b> Get Total Points <b>
-	 * Method: get Total Points for players to win
+	 * <b> Get Total Points <b> Method: get Total Points for players to win
 	 * 
 	 * @return totalNumberOfPoints (Integer)
 	 */
 	public static Integer getTotalPoints() {
 		return totalNumberOfPoints;
 	}
+
 	/**
-	 * <b> Set Total Points <b>
-	 * Method: Sets the total points foe teams to win
+	 * <b> Set Total Points <b> Method: Sets the total points foe teams to win
 	 * 
 	 * @sets totalNumberOfPoints from @param numberOfPoints (Integer)
 	 */
 	public static void setTotalPoints(int numberOfPoints) {
 		totalNumberOfPoints = numberOfPoints;
 	}
+
 	/**
-	 * <b> Get Points scored by Red Team <b>
-	 * Method: Get points, which are earned by kills,  
+	 * <b> Get Points scored by Red Team <b> Method: Get points, which are
+	 * earned by kills,
+	 * 
 	 * @return numberOfTeamRedPoints (Integer)
 	 */
 	public static Integer getRedPoints() {
 		return numberOfTeamRedPoints;
 	}
+
 	/**
-	 * <b> Get Points scored by Blue Team <b>
-	 * Method: Get points, which are earned by kills,  
+	 * <b> Get Points scored by Blue Team <b> Method: Get points, which are
+	 * earned by kills,
+	 * 
 	 * @return numberOfTeamBluePoints (Integer)
 	 */
 	public static Integer getBluePoints() {
 		return numberOfTeamBluePoints;
 	}
+
 	/**
-	 * <b> Set Points scored by Red Team <b>
-	 * Method: Get points, which are earned by kills,  
+	 * <b> Set Points scored by Red Team <b> Method: Get points, which are
+	 * earned by kills,
+	 * 
 	 * @return numberOfTeamRedPoints = @param numberOfPoints (Integer)
 	 */
 	public static void setRedPoints(int numberOfPoints) {
 		numberOfTeamRedPoints = numberOfPoints;
 	}
+
 	/**
-	 * <b> Set Points scored by Blue Team <b>
-	 * Method: Get points, which are earned by kills,  
+	 * <b> Set Points scored by Blue Team <b> Method: Get points, which are
+	 * earned by kills,
+	 * 
 	 * @return numberOfTeamBluePoints = @param numberOfPoints (Integer)
 	 */
 	public static void setBluePoints(int numberOfPoints) {
 		numberOfTeamBluePoints = numberOfPoints;
 	}
+
 	/**
-	 * <b> Reset All Points <b>
-	 * Method: The Methods it triggers are: 
+	 * <b> Reset All Points <b> Method: The Methods it triggers are:
 	 * <ul>
-	 * <li> setRedPoints() = @param (Integer) - setting points to 0 for Blue Team
-	 * <li> setBluePoints() = @param (Integer) - setting points to 0 for Blue Team 
+	 * <li>setRedPoints() = @param (Integer) - setting points to 0 for Blue Team
+	 * <li>setBluePoints() = @param (Integer) - setting points to 0 for Blue
+	 * Team
 	 * <ul>
 	 * 
 	 */
 	public static void resetAllTeamPoints() {
 		setRedPoints(0);
 		setBluePoints(0);
+	}
+
+
+
+	public static HashMap<Player, Integer> getIndividualPlayerKills() {
+		return playerKills;
+	}
+
+	public static void setIndividualPlayerKills(Player player, int kills) {
+		playerKills.put(player, kills);
+	}
+
+	public static HashMap<Player, Integer> getIndividualPlayerDeaths() {
+		return playerDeaths;
+	}
+
+	public static void setIndividualPlayerDeaths(Player player, int kills) {
+		playerDeaths.put(player, kills);
 	}
 
 }

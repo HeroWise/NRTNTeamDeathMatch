@@ -29,10 +29,12 @@
  */
 package com.topobon.nrtntdm;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.topobon.nrtntdm.commands.TeamDeathMatchNRTNCommands;
+import com.topobon.nrtntdm.events.PlayerDeath;
 
 
 /**
@@ -52,7 +54,7 @@ import com.topobon.nrtntdm.commands.TeamDeathMatchNRTNCommands;
  * 
  * @author HeroWise
  * @version HW1.2_0TDMNRTN (Plugin Version)
- * @version 1.10 (MInecraft Server Version)
+ * @version 1.10 (Minecraft Server Version)
  * 
  */
 public class TeamDeathMatchNRTN extends JavaPlugin {
@@ -84,6 +86,7 @@ public class TeamDeathMatchNRTN extends JavaPlugin {
 		// Registering Commands
 		this.getCommand("tdm").setExecutor(new TeamDeathMatchNRTNCommands(this));
 		// Registering Events
+		Bukkit.getPluginManager().registerEvents(new PlayerDeath(this), this);
 	}
 	
 	/**
