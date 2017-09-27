@@ -29,11 +29,11 @@
  */
 package com.topobon.nrtntdm;
 
-import java.util.ArrayList;
-
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.topobon.nrtntdm.commands.TeamDeathMatchNRTNCommands;
+
 
 /**
  * <b>Team Death Match Extreme - NRTN </b>
@@ -82,10 +82,13 @@ public class TeamDeathMatchNRTN extends JavaPlugin {
 		System.out.println(logo.getLogo() + "TEAM DEATH MATCH Plugin has been deployed");
 		System.out.println(logo.getLogo() + "Initiating Server Sequence....");
 		System.out.println(logo.getLogo() + "TEAM DEATH MATCH Plugin is ready to be used!");
-
+		this.getCommand("tdm").setExecutor(new TeamDeathMatchNRTNCommands(this));
 	}
 	
-	
+	public void setGameInfo(){
+		//Location is set in the Location Manager Class
+		
+	}
 	/**
 	 * 
 	 * @return Logo Object to #getLogo()  

@@ -27,31 +27,17 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
 package com.topobon.nrtntdm.arena;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
-public class LocationManager {
-	public static Location teamRedSpawn;
-	public static Location teamBlueSpawn;
-	//TODO Change location
-	public static Location getLocationForTeamRed() {
-		double x = 3603;
-		double y = 55;
-		double z = -4158;
-
-		return new Location(Bukkit.getWorld("Naruto"), x, y, z);
+public class TDMLocation {
+	
+	public static void teleportPlayerToTeamRedSpawn(Player player){
+		player.teleport(LocationManager.getLocationForTeamRed());
 	}
-
-	public static Location getLocationForTeamBlue() {
-
-		double x = 3603;
-		double y = 55;
-		double z = -4158;
-
-		return new Location(Bukkit.getWorld("Naruto"), x, y, z);
+	public static void teleportPlayerToTeamBlueSpawn(Player player) {
+		player.teleport(LocationManager.getLocationForTeamRed());
+		
 	}
-
 }

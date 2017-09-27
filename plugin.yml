@@ -1,0 +1,10 @@
+name: NRTNTeamDeathMatch
+main: com.topobon.nrtntdm.TeamDeathMatchNRTN
+author: HeroWise
+version: 1
+
+commands:
+  tdm:
+    description: Your description
+    usage: /tdm
+    aliases: t
