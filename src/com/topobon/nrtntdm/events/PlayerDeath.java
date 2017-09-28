@@ -72,7 +72,7 @@ public class PlayerDeath implements Listener {
 				Bukkit.broadcastMessage(Utility.messageToPlayer("&c&l" + killedPlayer.getDisplayName()
 						+ "&a has been killed by &c&l" + killer.getDisplayName()
 						+ "! No points would be deducted this time due to friendly fire on, but if problems persist points would be decducted..."));
-
+			
 				TDMLocation.teleportPlayerToTeamRedSpawn(killedPlayer);
 			}
 			// RED kills BLUE
@@ -85,6 +85,7 @@ public class PlayerDeath implements Listener {
 				TeamDeathMatch.setRedPoints(TeamDeathMatch.getRedPoints() + 1);
 				TeamDeathMatch.setIndividualPlayerKills(killer, TeamDeathMatch.getIndividualPlayerKills().get(killer)+1);
 				TeamDeathMatch.setIndividualPlayerDeaths(killedPlayer, TeamDeathMatch.getIndividualPlayerDeaths().get(killedPlayer)+1);
+				e.setDeathMessage("BAD LIFE ");
 				// Update Scoreboard for everyone
 				for (Player player : TeamDeathMatch.getPlayersInRedTeam()) {
 					ScoreboardUtil.unrankedSidebarDisplay(player,
@@ -93,7 +94,7 @@ public class PlayerDeath implements Listener {
 									Utility.decodeMessage(
 											"&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
 									Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills().get(player)),
-									Utility.decodeMessage("&0|&aDeaths&7:&4 " + 0),
+									Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(player)),
 									Utility.decodeMessage("&8&m&l----------") });
 				}
 				for (Player player : TeamDeathMatch.getPlayersInBlueTeam()) {
@@ -117,7 +118,7 @@ public class PlayerDeath implements Listener {
 				Bukkit.broadcastMessage(Utility.messageToPlayer("&b&l" + killedPlayer.getDisplayName()
 						+ "&a has been killed by &b&l" + killer.getDisplayName()
 						+ "! No points would be deducted this time due to friendly fire on, but if problems persist points would be decducted..."));
-
+		
 				TDMLocation.teleportPlayerToTeamBlueSpawn(killedPlayer);
 			}
 			// BLUE kills RED
@@ -130,6 +131,7 @@ public class PlayerDeath implements Listener {
 				TeamDeathMatch.setBluePoints(TeamDeathMatch.getBluePoints() + 1);
 				TeamDeathMatch.setIndividualPlayerKills(killer, TeamDeathMatch.getIndividualPlayerKills().get(killer)+1);
 				TeamDeathMatch.setIndividualPlayerDeaths(killedPlayer, TeamDeathMatch.getIndividualPlayerDeaths().get(killedPlayer)+1);
+	
 				// Displaying to Blue Team
 				for (Player player : TeamDeathMatch.getPlayersInBlueTeam()) {
 					ScoreboardUtil.unrankedSidebarDisplay(player,

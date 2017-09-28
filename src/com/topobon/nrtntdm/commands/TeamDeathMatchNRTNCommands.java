@@ -71,7 +71,7 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 
 				if (args[0].equalsIgnoreCase("start") && (!TeamDeathMatch.isGameRunning())) {
 					TeamDeathMatch.startGame();
-					TeamDeathMatch.setTotalPoints(2); // SET POINTS FOR GAME
+					TeamDeathMatch.setTotalPoints(4); // SET POINTS FOR GAME
 					sender.sendMessage(Utility.messageToPlayer("&aTeam Death Match has started!"));
 					/**
 					 * Setting Timer in minutes
