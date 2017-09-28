@@ -77,6 +77,8 @@ public class TeamDeathMatch {
 	private static int totalNumberOfPoints; // Need to set
 	private static int numberOfTeamRedPoints;
 	private static int numberOfTeamBluePoints;
+	private static boolean isFriendlyFireOn;
+	private static int timeLimit;
 	private static ArrayList<Player> teamRed = new ArrayList<Player>();
 	private static ArrayList<Player> teamBlue = new ArrayList<Player>();
 	private static HashMap<Player, Integer> playerKills = new HashMap<>();
@@ -276,8 +278,14 @@ public class TeamDeathMatch {
 		setRedPoints(0);
 		setBluePoints(0);
 	}
-
-
+	
+	public static Boolean isFriendlyFireOn(){
+		return TeamDeathMatch.isFriendlyFireOn;
+	}
+	
+	public static void setFriendlFireOn(boolean isFriendlyFireOn){
+		TeamDeathMatch.isFriendlyFireOn = isFriendlyFireOn;
+	}
 
 	public static HashMap<Player, Integer> getIndividualPlayerKills() {
 		return playerKills;
@@ -294,5 +302,13 @@ public class TeamDeathMatch {
 	public static void setIndividualPlayerDeaths(Player player, int kills) {
 		playerDeaths.put(player, kills);
 	}
+
+	public static int getTimeLimit() {
+		return timeLimit;
+	}
+	public static void setTimeLimit(int timeInMinutes) {
+		timeLimit = timeInMinutes;
+	}
+
 
 }

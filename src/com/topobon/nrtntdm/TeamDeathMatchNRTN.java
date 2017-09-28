@@ -35,6 +35,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.topobon.nrtntdm.commands.TeamDeathMatchNRTNCommands;
 import com.topobon.nrtntdm.events.PlayerDeath;
+import com.topobon.nrtntdm.events.PlayerFriendlyFire;
 
 
 /**
@@ -87,6 +88,25 @@ public class TeamDeathMatchNRTN extends JavaPlugin {
 		this.getCommand("tdm").setExecutor(new TeamDeathMatchNRTNCommands(this));
 		// Registering Events
 		Bukkit.getPluginManager().registerEvents(new PlayerDeath(this), this);
+		Bukkit.getPluginManager().registerEvents(new PlayerFriendlyFire(this), this);
+	}
+	/**
+	 * <b> Sets Game Rules <b>
+	 * Method: Calls when class runs {@link #getPluginLoader()}
+	 * <p>
+	 * It's work is to:
+	 * <p>
+	 * <ul>
+	 * <li>TeamDeathMacth#setTotalPoints (Integer)
+	 * <li>TeamDeathMatch#setFriendlyFireOn (Boolean)
+	 * <li>TeamDeathMacth#setTimeLimit (Boolean)
+	 * <ul>
+	 */
+	public static void setGameInfo(){
+		TeamDeathMatch.setTotalPoints(4); // Total number of scores to win
+		TeamDeathMatch.setFriendlFireOn(true);
+		TeamDeathMatch.setTimeLimit(4); 
+
 	}
 	
 	/**

@@ -47,11 +47,11 @@ import me.winterguardian.easyscoreboards.ScoreboardUtil;
 public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 	TeamDeathMatchNRTN instance;
 	protected int numberOfSeconds;
-
+	
 	public TeamDeathMatchNRTNCommands(TeamDeathMatchNRTN instance) {
 		this.instance = instance;
 	}
-
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		// TODO Check for permissions
@@ -71,12 +71,12 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 
 				if (args[0].equalsIgnoreCase("start") && (!TeamDeathMatch.isGameRunning())) {
 					TeamDeathMatch.startGame();
-					TeamDeathMatch.setTotalPoints(4); // SET POINTS FOR GAME
-					sender.sendMessage(Utility.messageToPlayer("&aTeam Death Match has started!"));
+					TeamDeathMatchNRTN.setGameInfo();
 					/**
 					 * Setting Timer in minutes
 					 */
-					startTimer(3); // Setting TImer value
+					startTimer(TeamDeathMatch.getTimeLimit()); // Setting TImer value
+					sender.sendMessage(Utility.messageToPlayer("&aTeam Death Match has started!"));
 
 					return true;
 				}

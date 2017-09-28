@@ -26,11 +26,10 @@ public class PlayerDeath implements Listener {
 	@EventHandler
 	public void playerRespawn(PlayerRespawnEvent e) {
 		Player player = e.getPlayer();
-
+		// Check if game is runningS
 		if (TeamDeathMatch.isGameRunning()) {
 			
-			
-			
+			//Check player team
 			if (TeamDeathMatch.getPlayersInRedTeam().contains(player)) {
 				TDMLocation.teleportPlayerToTeamRedSpawn(player);
 				
