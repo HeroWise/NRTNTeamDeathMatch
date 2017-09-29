@@ -52,6 +52,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.bukkit.entity.Player;
 
+import com.coloredcarrot.api.sidebar.Sidebar;
+import com.coloredcarrot.api.sidebar.SidebarString;
+import com.topobon.nrtntdm.utils.Utility;
+
 import me.confuser.barapi.BarAPI;
 import me.winterguardian.easyscoreboards.ScoreboardUtil;
 
@@ -86,7 +90,11 @@ public class TeamDeathMatch {
 	private static ArrayList<Player> teamBlue = new ArrayList<Player>();
 	private static HashMap<Player, Integer> playerKills = new HashMap<>();
 	private static HashMap<Player, Integer> playerDeaths = new HashMap<>();
-
+	
+	private static TeamDeathMatchNRTN instance;
+	public TeamDeathMatch(TeamDeathMatchNRTN instance){
+		this.instance = instance;
+	}
 	/**
 	 * <b> Clear All Team <b> Method: Clears every players in Team Red and Team
 	 * Blue
@@ -321,5 +329,65 @@ public class TeamDeathMatch {
 	public static void setTimeLimit(int timeInMinutes) {
 		timeLimit = timeInMinutes;
 	}
+	/**
+	 * Tentative
+	 * @param instance
+	 * @param p
+	 * @return
+	 */
+	public static Sidebar getBlueSideBar(Player p){
+		
+		SidebarString line2 = new SidebarString(
+				Utility.decodeMessage("&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()));
 
+		SidebarString line3 = new SidebarString(
+				Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()));
+		SidebarString line4 = new SidebarString(
+				Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills().get(p)));
+		SidebarString line5 = new SidebarString(
+				Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(p)));
+		SidebarString line6 = new SidebarString(Utility.decodeMessage("&8&m&l----------"));
+
+		// SidebarString line1 = new SidebarString(ChatColor.RED + "Line 1!");	
+
+		Sidebar mySidebar = new Sidebar(Utility.decodeMessage("&b&lTeam Death Match"), instance, 60, line2, line3, line4, line5,line6);
+		// SidebarString line3 = new SidebarString("Hello", "World");
+
+		// Add the entry
+	
+
+		// Remove the entry
+		// mySidebar.removeEntry(line3);
+	//	mySidebar.showTo(e.getPlayer());
+		// mySidebar.hideFrom(player);
+		return mySidebar;
+	}
+	
+	public static Sidebar getRedSideBar(Player p){
+		
+		SidebarString line2 = new SidebarString(
+				Utility.decodeMessage("&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()));
+
+		SidebarString line3 = new SidebarString(
+				Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()));
+		SidebarString line4 = new SidebarString(
+				Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills().get(p)));
+		SidebarString line5 = new SidebarString(
+				Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(p)));
+		SidebarString line6 = new SidebarString(Utility.decodeMessage("&8&m&l----------"));
+
+		// SidebarString line1 = new SidebarString(ChatColor.RED + "Line 1!");	
+
+		// SidebarString line3 = new SidebarString("Hello", "World");
+
+		// Add the entry
+		Sidebar mySidebar = new Sidebar(Utility.decodeMessage("&c&lTeam Death Match"), instance, 60, line3, line2, line4, line5,line6);
+
+		// Remove the entry
+		// mySidebar.removeEntry(line3);
+	//	mySidebar.showTo(e.getPlayer());
+		// mySidebar.hideFrom(player);
+		return mySidebar;
+	}
+	
 }

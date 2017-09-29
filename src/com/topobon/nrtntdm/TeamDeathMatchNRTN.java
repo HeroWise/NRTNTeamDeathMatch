@@ -36,6 +36,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.topobon.nrtntdm.commands.TeamDeathMatchNRTNCommands;
 import com.topobon.nrtntdm.events.PlayerDeath;
 import com.topobon.nrtntdm.events.PlayerFriendlyFire;
+import com.topobon.nrtntdm.gameprocessing.GameManager;
 
 
 /**
@@ -61,7 +62,8 @@ import com.topobon.nrtntdm.events.PlayerFriendlyFire;
 public class TeamDeathMatchNRTN extends JavaPlugin {
 	private static Logo logo; // Logo object
 
-
+	
+	
 	/**
 	 * Method: Calls when class runs {@link #getPluginLoader()}
 	 * <p>
@@ -74,8 +76,10 @@ public class TeamDeathMatchNRTN extends JavaPlugin {
 	 * <li>Register Events
 	 * <li>Register Commands
 	 */
+	
 	public void onEnable() {
-		
+		new TeamDeathMatch(this);
+		new GameManager(this);
 		setLogo(ChatColor.translateAlternateColorCodes('&', "&7&l[&6&lNaruto &c&lRTN&7&l] &r"));
 		/**
 		 * Talks about the TDM plugin and its state

@@ -33,22 +33,24 @@ public class PlayerDeath implements Listener {
 			if (TeamDeathMatch.getPlayersInRedTeam().contains(player)) {
 				TDMLocation.teleportPlayerToTeamRedSpawn(player);
 				
-				ScoreboardUtil.unrankedSidebarDisplay(player,
-						new String[] { Utility.decodeMessage("&c&lTeam Death Match"),
-								Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
-								Utility.decodeMessage("&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
-								Utility.decodeMessage("&0|&aKills&7:&4 " +  TeamDeathMatch.getIndividualPlayerKills().get(player)),
-								Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(player)),
-								Utility.decodeMessage("&8&m&l----------") });
+//				ScoreboardUtil.unrankedSidebarDisplay(player,
+//						new String[] { Utility.decodeMessage("&c&lTeam Death Match"),
+//								Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
+//								Utility.decodeMessage("&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
+//								Utility.decodeMessage("&0|&aKills&7:&4 " +  TeamDeathMatch.getIndividualPlayerKills().get(player)),
+//								Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(player)),
+//								Utility.decodeMessage("&8&m&l----------") });
+				TeamDeathMatch.getRedSideBar(player).showTo(player);
 				e.setRespawnLocation(LocationManager.teamRedSpawn);
 			} else if (TeamDeathMatch.getPlayersInBlueTeam().contains(player)) {
-				ScoreboardUtil.unrankedSidebarDisplay(player,
-						new String[] { Utility.decodeMessage("&b&lTeam Death Match"),
-								Utility.decodeMessage("&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
-								Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
-								Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills().get(player)),
-								Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(player)),
-								Utility.decodeMessage("&8&m&l----------") });
+//				ScoreboardUtil.unrankedSidebarDisplay(player,
+//						new String[] { Utility.decodeMessage("&b&lTeam Death Match"),
+//								Utility.decodeMessage("&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
+//								Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
+//								Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills().get(player)),
+//								Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(player)),
+//								Utility.decodeMessage("&8&m&l----------") });
+				TeamDeathMatch.getBlueSideBar(player).showTo(player);
 				TDMLocation.teleportPlayerToTeamBlueSpawn(player);
 				e.setRespawnLocation(LocationManager.teamBlueSpawn);
 			}
@@ -84,27 +86,30 @@ public class PlayerDeath implements Listener {
 				TeamDeathMatch.setRedPoints(TeamDeathMatch.getRedPoints() + 1);
 				TeamDeathMatch.setIndividualPlayerKills(killer, TeamDeathMatch.getIndividualPlayerKills().get(killer)+1);
 				TeamDeathMatch.setIndividualPlayerDeaths(killedPlayer, TeamDeathMatch.getIndividualPlayerDeaths().get(killedPlayer)+1);
-				e.setDeathMessage("BAD LIFE ");
+			
 				// Update Scoreboard for everyone
 				for (Player player : TeamDeathMatch.getPlayersInRedTeam()) {
-					ScoreboardUtil.unrankedSidebarDisplay(player,
-							new String[] { Utility.decodeMessage("&c&lTeam Death Match"),
-									Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
-									Utility.decodeMessage(
-											"&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
-									Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills().get(player)),
-									Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(player)),
-									Utility.decodeMessage("&8&m&l----------") });
+//					ScoreboardUtil.unrankedSidebarDisplay(player,
+//							new String[] { Utility.decodeMessage("&c&lTeam Death Match"),
+//									Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
+//									Utility.decodeMessage(
+//											"&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
+//									Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills().get(player)),
+//									Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(player)),
+//									Utility.decodeMessage("&8&m&l----------") });
+				
+					TeamDeathMatch.getRedSideBar(player).showTo(player);
 				}
 				for (Player player : TeamDeathMatch.getPlayersInBlueTeam()) {
-					ScoreboardUtil.unrankedSidebarDisplay(player,
-							new String[] { Utility.decodeMessage("&b&lTeam Death Match"),
-									Utility.decodeMessage(
-											"&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
-									Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
-									Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills().get(player)),
-									Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(player)),
-									Utility.decodeMessage("&8&m&l----------") });
+//					ScoreboardUtil.unrankedSidebarDisplay(player,
+//							new String[] { Utility.decodeMessage("&b&lTeam Death Match"),
+//									Utility.decodeMessage(
+//											"&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
+//									Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
+//									Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills().get(player)),
+//									Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(player)),
+//									Utility.decodeMessage("&8&m&l----------") });
+					TeamDeathMatch.getBlueSideBar(player).showTo(player);
 				}
 
 				TDMLocation.teleportPlayerToTeamBlueSpawn(killedPlayer);
@@ -133,25 +138,28 @@ public class PlayerDeath implements Listener {
 	
 				// Displaying to Blue Team
 				for (Player player : TeamDeathMatch.getPlayersInBlueTeam()) {
-					ScoreboardUtil.unrankedSidebarDisplay(player,
-							new String[] { Utility.decodeMessage("&b&lTeam Death Match"),
-									Utility.decodeMessage(
-											"&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
-									Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
-									Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills().get(player)),
-									Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(player)),
-									Utility.decodeMessage("&8&m&l----------") });
+//					ScoreboardUtil.unrankedSidebarDisplay(player,
+//							new String[] { Utility.decodeMessage("&b&lTeam Death Match"),
+//									Utility.decodeMessage(
+//											"&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
+//									Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
+//									Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills().get(player)),
+//									Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(player)),
+//									Utility.decodeMessage("&8&m&l----------") });
+					System.out.println("test");
+					TeamDeathMatch.getBlueSideBar(player).showTo(player);
 				}
 				// DIsplaying to Red Team
 				for (Player player : TeamDeathMatch.getPlayersInRedTeam()) {
-					ScoreboardUtil.unrankedSidebarDisplay(player,
-							new String[] { Utility.decodeMessage("&c&lTeam Death Match"),
-									Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
-									Utility.decodeMessage(
-											"&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
-									Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills().get(player)),
-									Utility.decodeMessage("&0|&aDeaths&7:&4 " +  TeamDeathMatch.getIndividualPlayerKills().get(player)),
-									Utility.decodeMessage("&8&m&l----------") });
+//					ScoreboardUtil.unrankedSidebarDisplay(player,
+//							new String[] { Utility.decodeMessage("&c&lTeam Death Match"),
+//									Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
+//									Utility.decodeMessage(
+//											"&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
+//									Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills().get(player)),
+//									Utility.decodeMessage("&0|&aDeaths&7:&4 " +  TeamDeathMatch.getIndividualPlayerKills().get(player)),
+//									Utility.decodeMessage("&8&m&l----------") });
+					TeamDeathMatch.getRedSideBar(player).showTo(player);
 				}
 
 				TDMLocation.teleportPlayerToTeamRedSpawn(killedPlayer);
