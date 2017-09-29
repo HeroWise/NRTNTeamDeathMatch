@@ -26,9 +26,7 @@ public class GameManager {
 
 				Bukkit.broadcastMessage(Utility.decodeMessage(
 						"&a◇&c " + p.getName() + " &8- &aKills: " + TeamDeathMatch.getIndividualPlayerKills().get(p)));
-				// p.sendMessage(Utility.messageToPlayer("&bJust removing your
-				// sins... Steel is my body Fire is my Blood"));
-				// p.setHealth(0);
+			
 
 			}
 			for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
@@ -49,19 +47,10 @@ public class GameManager {
 
 				Bukkit.broadcastMessage(Utility.decodeMessage(
 						"&a◇&b " + p.getName() + " &8- &aKills: " + TeamDeathMatch.getIndividualPlayerKills().get(p)));
-				// p.sendMessage(Utility.messageToPlayer("&bJust removing your
-				// sins... Unaware to death Nor known to life"));
-				// p.setHealth(0);
+			
 			}
 
-			// for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
-			// BarAPI.removeBar(p);
-			// ScoreboardUtil.unrankedSidebarDisplay(p, new String[] {});
-			// }
-			// for (Player p : TeamDeathMatch.getPlayersInBlueTeam()) {
-			// BarAPI.removeBar(p);
-			// ScoreboardUtil.unrankedSidebarDisplay(p, new String[] {});
-			// }
+		
 			for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
 				BarAPI.removeBar(p);
 				// ScoreboardUtil.unrankedSidebarDisplay(p, new String[] {});
@@ -79,6 +68,7 @@ public class GameManager {
 
 	// TIME ran out here so this method gets triggered
 	public static void selectWinningTeam() {
+		if(TeamDeathMatch.isGameRunning()) {
 		Bukkit.broadcastMessage(Utility.decodeMessage("&a&lTIME IS UP! "));
 		if (TeamDeathMatch.getRedPoints() > TeamDeathMatch.getBluePoints() && TeamDeathMatch.isGameRunning()) {
 			Bukkit.broadcastMessage(Utility.decodeMessage("&c&lRed Team&a has claimed victory!"));
@@ -105,7 +95,7 @@ public class GameManager {
 			
 
 		}
-
+		
 		if (TeamDeathMatch.getBluePoints() == TeamDeathMatch.getRedPoints() && TeamDeathMatch.isGameRunning()) {
 			Bukkit.broadcastMessage(
 					Utility.decodeMessage("&c&lRed Team &aand &b&lBlue Team &aboth has drawn the match! "));
@@ -122,17 +112,10 @@ public class GameManager {
 			}
 		}
 
-		// for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
-		// BarAPI.removeBar(p);
-		// ScoreboardUtil.unrankedSidebarDisplay(p, new String[] {});
-		// }
-		// for (Player p : TeamDeathMatch.getPlayersInBlueTeam()) {
-		// BarAPI.removeBar(p);
-		// ScoreboardUtil.unrankedSidebarDisplay(p, new String[] {});
-		// }
+	
 		for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
 			BarAPI.removeBar(p);
-			// ScoreboardUtil.unrankedSidebarDisplay(p, new String[] {});
+			
 			TeamDeathMatch.getRedSideBar(p).hideFrom(p);
 		}
 		for (Player p : TeamDeathMatch.getPlayersInBlueTeam()) {
@@ -140,6 +123,6 @@ public class GameManager {
 			TeamDeathMatch.getBlueSideBar(p).hideFrom(p);
 		}
 		TeamDeathMatch.stopGame();
-	}
+	}}
 
 }

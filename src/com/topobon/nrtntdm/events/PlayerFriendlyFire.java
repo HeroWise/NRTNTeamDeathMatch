@@ -48,34 +48,4 @@ public class PlayerFriendlyFire implements Listener {
 		}
 
 	}
-
-//	@EventHandler
-//	public void onPlayerJoin(PlayerJoinEvent e) {
-//		System.out.println("d");
-//		Player p = e.getPlayer();
-//		
-//		SidebarString line2 = new SidebarString(
-//				Utility.decodeMessage("&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()));
-//
-//		SidebarString line3 = new SidebarString(
-//				Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()));
-//		SidebarString line4 = new SidebarString(
-//				Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills().get(p)));
-//		SidebarString line5 = new SidebarString(
-//				Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(p)));
-//		SidebarString line6 = new SidebarString(Utility.decodeMessage("&8&m&l----------"));
-//
-//		// SidebarString line1 = new SidebarString(ChatColor.RED + "Line 1!");	
-//
-//		Sidebar mySidebar = new Sidebar(Utility.decodeMessage("&b&lTeam Death Match"), instance, 60, line2, line3, line4, line5,line6);
-//		// SidebarString line3 = new SidebarString("Hello", "World");
-//
-//		// Add the entry
-//	
-//
-//		// Remove the entry
-//		// mySidebar.removeEntry(line3);
-//		mySidebar.showTo(e.getPlayer());
-//		// mySidebar.hideFrom(player);
-//	}
 }

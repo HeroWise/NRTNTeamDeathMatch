@@ -36,7 +36,8 @@ import org.bukkit.Location;
 public class LocationManager {
 	public static Location teamRedSpawn;
 	public static Location teamBlueSpawn;
-	//TODO Change location and add a mechanism to change world location
+
+	// TODO Change location and add a mechanism to change world location
 	public static Location getLocationForTeamRed() {
 		double x = -5916;
 		double y = 12;

@@ -63,40 +63,24 @@ public class QueueProcess {
 			}
 		}
 		if (TeamDeathMatch.getPlayersInRedTeam().size() >= TeamDeathMatch.getPlayersInBlueTeam().size()) {
-			
+
 			TeamDeathMatch.setIndividualPlayerKills(player, 0);
 			TeamDeathMatch.setIndividualPlayerDeaths(player, 0);
-//			ScoreboardUtil.unrankedSidebarDisplay(player,
-//					new String[] { Utility.decodeMessage("&b&lTeam Death Match"),
-//							Utility.decodeMessage("&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
-//							Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
-//							Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills()),
-//							Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths()),
-//							Utility.decodeMessage("&8&m&l----------") });
+
 			TeamDeathMatch.getBlueSideBar(player).showTo(player);
 			TeamDeathMatch.addPlayerInBlueTeam(player);
 			player.sendMessage(Utility.messageToPlayer("&aYou have joined &b&lBlue&a Team!"));
 			TDMLocation.teleportPlayerToTeamBlueSpawn(player);
-			//player.setBedSpawnLocation(LocationManager.teamBlueSpawn);
 
 		} else {
 			TeamDeathMatch.setIndividualPlayerKills(player, 0);
 			TeamDeathMatch.setIndividualPlayerDeaths(player, 0);
-//			ScoreboardUtil.unrankedSidebarDisplay(player,
-//					new String[] { Utility.decodeMessage("&c&lTeam Death Match"),
-//							Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()),
-//							Utility.decodeMessage("&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()),
-//							Utility.decodeMessage("&0|&aKills&7:&4 " + TeamDeathMatch.getIndividualPlayerKills()),
-//							Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths()),
-//							Utility.decodeMessage("&8&m&l----------") });
-//			
+
 			TeamDeathMatch.addPlayerInRedTeam(player);
 			TeamDeathMatch.getRedSideBar(player).showTo(player);
 			player.sendMessage(Utility.messageToPlayer("&aYou have joined &c&lRed&a Team!"));
 			TDMLocation.teleportPlayerToTeamRedSpawn(player);
-		//	player.setBedSpawnLocation(LocationManager.teamRedSpawn);
-			// BarAPI.setMessage(player, "Time Left till Team Death Match Ends",
-			// 15 /* minutes*/ * 60);
+
 		}
 	}
 

@@ -32,12 +32,13 @@ package com.topobon.nrtntdm.arena;
 import org.bukkit.entity.Player;
 
 public class TDMLocation {
-	
-	public static void teleportPlayerToTeamRedSpawn(Player player){
+
+	public static void teleportPlayerToTeamRedSpawn(Player player) {
 		player.teleport(LocationManager.getLocationForTeamRed());
 	}
+
 	public static void teleportPlayerToTeamBlueSpawn(Player player) {
 		player.teleport(LocationManager.getLocationForTeamBlue());
-		
+
 	}
 }
