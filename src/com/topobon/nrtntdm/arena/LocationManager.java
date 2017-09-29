@@ -38,18 +38,18 @@ public class LocationManager {
 	public static Location teamBlueSpawn;
 	//TODO Change location and add a mechanism to change world location
 	public static Location getLocationForTeamRed() {
-		double x = -708;
-		double y = 4;
-		double z = 171;
+		double x = -5916;
+		double y = 12;
+		double z = -5368;
 		teamRedSpawn = new Location(Bukkit.getWorld("world"), x, y, z);
 		return teamRedSpawn;
 	}
 
 	public static Location getLocationForTeamBlue() {
 
-		double x = -708;
-		double y = 4;
-		double z = 102;
+		double x = -5643;
+		double y = 13;
+		double z = -5285;
 		teamBlueSpawn = new Location(Bukkit.getWorld("world"), x, y, z);
 		return teamBlueSpawn;
 	}

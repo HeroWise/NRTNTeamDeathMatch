@@ -52,6 +52,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.bukkit.entity.Player;
 
+import me.confuser.barapi.BarAPI;
+import me.winterguardian.easyscoreboards.ScoreboardUtil;
+
 /**
  * <b>TeamDeathMatch </b>
  * <p>
@@ -200,6 +203,14 @@ public class TeamDeathMatch {
 	 * 
 	 */
 	public static void stopGame() {
+		for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
+			BarAPI.removeBar(p);
+			ScoreboardUtil.unrankedSidebarDisplay(p, new String[] {});
+		}
+		for (Player p : TeamDeathMatch.getPlayersInBlueTeam()) {
+			BarAPI.removeBar(p);
+			ScoreboardUtil.unrankedSidebarDisplay(p, new String[] {});
+		}
 		setGameRunning(false);
 		clearAllTeams();
 		resetAllTeamPoints();
@@ -278,12 +289,12 @@ public class TeamDeathMatch {
 		setRedPoints(0);
 		setBluePoints(0);
 	}
-	
-	public static Boolean isFriendlyFireOn(){
+
+	public static Boolean isFriendlyFireOn() {
 		return TeamDeathMatch.isFriendlyFireOn;
 	}
-	
-	public static void setFriendlFireOn(boolean isFriendlyFireOn){
+
+	public static void setFriendlFireOn(boolean isFriendlyFireOn) {
 		TeamDeathMatch.isFriendlyFireOn = isFriendlyFireOn;
 	}
 
@@ -306,9 +317,9 @@ public class TeamDeathMatch {
 	public static int getTimeLimit() {
 		return timeLimit;
 	}
+
 	public static void setTimeLimit(int timeInMinutes) {
 		timeLimit = timeInMinutes;
 	}
-
 
 }

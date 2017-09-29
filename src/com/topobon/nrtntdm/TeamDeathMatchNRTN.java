@@ -103,9 +103,9 @@ public class TeamDeathMatchNRTN extends JavaPlugin {
 	 * <ul>
 	 */
 	public static void setGameInfo(){
-		TeamDeathMatch.setTotalPoints(4); // Total number of scores to win
+		TeamDeathMatch.setTotalPoints(30); // Total number of scores to win
 		TeamDeathMatch.setFriendlFireOn(true);
-		TeamDeathMatch.setTimeLimit(4); 
+		TeamDeathMatch.setTimeLimit(15); 
 
 	}
 	
