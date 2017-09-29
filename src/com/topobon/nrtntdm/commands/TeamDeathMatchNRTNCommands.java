@@ -90,7 +90,7 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 				if (args[0].equalsIgnoreCase("join") && (TeamDeathMatch.isGameRunning()) && sender instanceof Player) {
 					Player pSender = (Player) sender;
 					QueueProcess.setPlayerInQueue(pSender);
-					pSender.sendMessage("gay");
+					
 				}
 				if (args[0].equalsIgnoreCase("setscore") && (TeamDeathMatch.isGameRunning()) && sender instanceof Player && sender.isOp()) {
 					Player pSender = (Player) sender;
@@ -100,7 +100,7 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 				}
 				
 				if (args[0].equalsIgnoreCase("timelimit") && (TeamDeathMatch.isGameRunning()) && sender instanceof Player && sender.isOp()) {
-					Player pSender = (Player) sender;
+					
 					Bukkit.broadcastMessage(Utility.messageToPlayer("&aTime has been set to:&7 " + args[1] + " mins!"));
 					
 					TeamDeathMatch.setTimeLimit(Integer.valueOf(args[1]));
@@ -181,7 +181,9 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 						TeamDeathMatch.getBlueSideBar(p).showTo(p);
 					}}
 				
-
+				if(!TeamDeathMatch.isGameRunning()){
+					this.cancel();
+				}
 				numberOfSeconds--;
 				if (GameManager.checkIfGameWon()) {
 					this.cancel();

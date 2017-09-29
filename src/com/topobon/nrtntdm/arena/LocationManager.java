@@ -41,7 +41,7 @@ public class LocationManager {
 		double x = -5916;
 		double y = 12;
 		double z = -5368;
-		teamRedSpawn = new Location(Bukkit.getWorld("world"), x, y, z);
+		teamRedSpawn = new Location(Bukkit.getWorld("Naruto"), x, y, z);
 		return teamRedSpawn;
 	}
 
@@ -50,7 +50,7 @@ public class LocationManager {
 		double x = -5643;
 		double y = 13;
 		double z = -5285;
-		teamBlueSpawn = new Location(Bukkit.getWorld("world"), x, y, z);
+		teamBlueSpawn = new Location(Bukkit.getWorld("Naruto"), x, y, z);
 		return teamBlueSpawn;
 	}
 

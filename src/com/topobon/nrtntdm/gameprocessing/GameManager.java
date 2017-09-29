@@ -19,7 +19,7 @@ public class GameManager {
 
 	public static boolean checkIfGameWon() {
 
-		if (TeamDeathMatch.getRedPoints() >= TeamDeathMatch.getTotalPoints()) {
+		if (TeamDeathMatch.getRedPoints() >= TeamDeathMatch.getTotalPoints() && TeamDeathMatch.isGameRunning()) {
 			Bukkit.broadcastMessage(Utility.decodeMessage("&c&lRed Team&a has claimed victory!"));
 			Bukkit.broadcastMessage(Utility.decodeMessage("&c&lRed Team &aincluded:"));
 			for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
@@ -42,7 +42,7 @@ public class GameManager {
 			}
 			TeamDeathMatch.stopGame();
 			return true;
-		} else if (TeamDeathMatch.getBluePoints() >= TeamDeathMatch.getTotalPoints()) {
+		} else if (TeamDeathMatch.getBluePoints() >= TeamDeathMatch.getTotalPoints() && TeamDeathMatch.isGameRunning()) {
 			Bukkit.broadcastMessage(Utility.decodeMessage("&b&lBlue Team&a has claimed victory!"));
 			Bukkit.broadcastMessage(Utility.decodeMessage("&b&lBlue Team &aincluded:"));
 			for (Player p : TeamDeathMatch.getPlayersInBlueTeam()) {
@@ -80,7 +80,7 @@ public class GameManager {
 	// TIME ran out here so this method gets triggered
 	public static void selectWinningTeam() {
 		Bukkit.broadcastMessage(Utility.decodeMessage("&a&lTIME IS UP! "));
-		if (TeamDeathMatch.getRedPoints() > TeamDeathMatch.getBluePoints()) {
+		if (TeamDeathMatch.getRedPoints() > TeamDeathMatch.getBluePoints() && TeamDeathMatch.isGameRunning()) {
 			Bukkit.broadcastMessage(Utility.decodeMessage("&c&lRed Team&a has claimed victory!"));
 			for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
 				Bukkit.broadcastMessage(Utility.decodeMessage("&c&lRed Team &aincluded:"));
@@ -92,15 +92,16 @@ public class GameManager {
 
 			
 
-		} else if (TeamDeathMatch.getRedPoints() < TeamDeathMatch.getBluePoints()) {
+		} else if (TeamDeathMatch.getRedPoints() < TeamDeathMatch.getBluePoints() && TeamDeathMatch.isGameRunning()) {
 			Bukkit.broadcastMessage(Utility.decodeMessage("&b&lBlue Team&a has claimed victory!"));
+			Bukkit.broadcastMessage(Utility.decodeMessage("&b&lBlue Team &aincluded:"));
 			for (Player p : TeamDeathMatch.getPlayersInBlueTeam()) {
-				Bukkit.broadcastMessage(Utility.decodeMessage("&b&lBlue Team &aincluded:"));
+			
 				Bukkit.broadcastMessage(Utility.decodeMessage(
 						"&a◇&b " + p.getName() + " &8- &aKills: " + TeamDeathMatch.getIndividualPlayerKills().get(p)));
 				p.sendMessage(Utility.messageToPlayer("&bJust removing your sins...Steel is my body Fire is my Blood"));
 				p.setHealth(0);
-			}
+			} 
 			
 
 		}

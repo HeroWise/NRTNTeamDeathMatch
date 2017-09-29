@@ -350,7 +350,7 @@ public class TeamDeathMatch {
 
 		// SidebarString line1 = new SidebarString(ChatColor.RED + "Line 1!");	
 
-		Sidebar mySidebar = new Sidebar(Utility.decodeMessage("&b&lTeam Death Match"), instance, 60, line2, line3, line4, line5,line6);
+		Sidebar mySidebar = new Sidebar(Utility.decodeMessage("&b&lTeam Death Match"), instance, 20, line2, line3, line4, line5,line6);
 		// SidebarString line3 = new SidebarString("Hello", "World");
 
 		// Add the entry
@@ -381,7 +381,7 @@ public class TeamDeathMatch {
 		// SidebarString line3 = new SidebarString("Hello", "World");
 
 		// Add the entry
-		Sidebar mySidebar = new Sidebar(Utility.decodeMessage("&c&lTeam Death Match"), instance, 60, line3, line2, line4, line5,line6);
+		Sidebar mySidebar = new Sidebar(Utility.decodeMessage("&c&lTeam Death Match"), instance, 20, line3, line2, line4, line5,line6);
 
 		// Remove the entry
 		// mySidebar.removeEntry(line3);
