@@ -36,8 +36,6 @@ import com.topobon.nrtntdm.arena.TDMLocation;
 
 import com.topobon.nrtntdm.utils.Utility;
 
-import me.winterguardian.easyscoreboards.ScoreboardUtil;
-
 public class QueueProcess {
 
 	static TeamDeathMatchNRTN instance;
