@@ -67,8 +67,9 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 
 			if (args.length > 0) {
 
-				if (args[0].equalsIgnoreCase("start") && (!TeamDeathMatch.isGameRunning()) && sender.isOp()) {
+				if (args[0].equalsIgnoreCase("start") && (!TeamDeathMatch.isGameRunning()) && sender.hasPermission("tdm.nrtn") || sender.isOp()) {
 					TeamDeathMatch.startGame();
+
 					TeamDeathMatchNRTN.setGameInfo();
 
 					/**
@@ -78,9 +79,19 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 																// value
 					sender.sendMessage(Utility.messageToPlayer("&aTeam Death Match has started!"));
 
+					Bukkit.broadcastMessage(Utility
+							.decodeMessage("&l&a▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"));
+				
+					Bukkit.broadcastMessage(Utility.sendInfo(
+							"&c&lTeam Death Match\n&b ◈  A team based game where two teams fight for victory\n ◈  First to a certain amount of points win\n ◈  There is a time limit too, after a certaim time the team with the highest points win. \n ◈ If the points are equal, both teams draw!"));
+					Bukkit.broadcastMessage(Utility.sendInfo(
+							"&3There are certain procedures you need to do to join a game and have the best experience with:\n &8► &3Please initiate commands /tdm join to enter this round\n &8► &3You also need to initiate commands /fb toggle if you need to see scoreboard &7(&l&3Highly recommended&7)"));
+
+					Bukkit.broadcastMessage(Utility
+							.decodeMessage("&l&a▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"));
 					return true;
 				}
-				if (args[0].equalsIgnoreCase("stop") && (TeamDeathMatch.isGameRunning()) && sender.isOp()) {
+				if (args[0].equalsIgnoreCase("stop") && (TeamDeathMatch.isGameRunning()) && sender.hasPermission("tdm.nrtn") || sender.isOp()) {
 					TeamDeathMatch.stopGame();
 					sender.sendMessage(Utility.messageToPlayer("&aTeam Death Match has stopped!"));
 					return true;
@@ -91,17 +102,28 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 
 				}
 				if (args[0].equalsIgnoreCase("setscore") && (TeamDeathMatch.isGameRunning()) && sender instanceof Player
-						&& sender.isOp()) {
+						&& sender.hasPermission("tdm.nrtn") || sender.isOp()) {
 					Player pSender = (Player) sender;
-					Bukkit.broadcastMessage(Utility.messageToPlayer("&aScore has been set to:&7 " + args[1] + "!"));
+					Bukkit.broadcastMessage(Utility.sendInfo("&aScore has been set to:&7 " + args[1] + "! You now need " +args[1]+" total points to win!"));
 					TeamDeathMatch.setTotalPoints(Integer.valueOf(args[1]));
 
 				}
+				if (args[0].equalsIgnoreCase("leave") && (TeamDeathMatch.isGameRunning()) && sender instanceof Player) {
+					Player pSender = (Player) sender;
+					if (TeamDeathMatch.getPlayersInBlueTeam().contains(pSender)
+							|| TeamDeathMatch.getPlayersInRedTeam().contains(pSender)) {
 
+						pSender.sendMessage(Utility.sendInfo(("&aYou have left the Match!")));
+						Bukkit.broadcastMessage(Utility.sendInfo("&l&a" + pSender.getName() + " has left!"));
+						TeamDeathMatch.removePlayerFromGame(pSender);
+						pSender.setHealth(0);
+					}
+
+				}
 				if (args[0].equalsIgnoreCase("timelimit") && (TeamDeathMatch.isGameRunning())
 						&& sender instanceof Player && sender.isOp()) {
 
-					Bukkit.broadcastMessage(Utility.messageToPlayer("&aTime has been set to:&7 " + args[1] + " mins!"));
+					Bukkit.broadcastMessage(Utility.sendInfo("&aTime has been set to:&7 " + args[1] + " mins!"));
 
 					TeamDeathMatch.setTimeLimit(Integer.valueOf(args[1]));
 					startTimer(TeamDeathMatch.getTimeLimit()); // Setting TImer

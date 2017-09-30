@@ -38,7 +38,9 @@ public class Utility {
 	public static String messageToPlayer(String message) {
         return message = ChatColor.translateAlternateColorCodes('&', ChatColor.translateAlternateColorCodes('&', TeamDeathMatchNRTN.getInitials() + " " + message));
     }
-	
+	public static String sendInfo(String message) {
+        return message = ChatColor.translateAlternateColorCodes('&', ChatColor.translateAlternateColorCodes('&', TeamDeathMatchNRTN.getInfoInitials() + " " + message));
+    }
 	public static String decodeMessage(String message) {
         return message = ChatColor.translateAlternateColorCodes('&', ChatColor.translateAlternateColorCodes('&',message));
     }
