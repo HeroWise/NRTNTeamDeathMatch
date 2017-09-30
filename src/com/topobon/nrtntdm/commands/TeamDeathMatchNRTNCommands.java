@@ -66,7 +66,8 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 			}
 
 			if (args.length > 0) {
-
+			
+				
 				if (args[0].equalsIgnoreCase("start") && (!TeamDeathMatch.isGameRunning()) && sender.hasPermission("tdm.nrtn") || sender.isOp()) {
 					TeamDeathMatch.startGame();
 
@@ -89,18 +90,19 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 
 					Bukkit.broadcastMessage(Utility
 							.decodeMessage("&l&a▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"));
-					return true;
-				}
-				if (args[0].equalsIgnoreCase("stop") && (TeamDeathMatch.isGameRunning()) && sender.hasPermission("tdm.nrtn") || sender.isOp()) {
-					TeamDeathMatch.stopGame();
-					sender.sendMessage(Utility.messageToPlayer("&aTeam Death Match has stopped!"));
-					return true;
+					
 				}
 				if (args[0].equalsIgnoreCase("join") && (TeamDeathMatch.isGameRunning()) && sender instanceof Player) {
 					Player pSender = (Player) sender;
 					QueueProcess.setPlayerInQueue(pSender);
-
+					
 				}
+				if (args[0].equalsIgnoreCase("stop") && (TeamDeathMatch.isGameRunning()) && sender.hasPermission("tdm.nrtn") || sender.isOp()) {
+					TeamDeathMatch.stopGame();
+					sender.sendMessage(Utility.messageToPlayer("&aTeam Death Match has stopped!"));
+					
+				}
+				
 				if (args[0].equalsIgnoreCase("setscore") && (TeamDeathMatch.isGameRunning()) && sender instanceof Player
 						&& sender.hasPermission("tdm.nrtn") || sender.isOp()) {
 					Player pSender = (Player) sender;
