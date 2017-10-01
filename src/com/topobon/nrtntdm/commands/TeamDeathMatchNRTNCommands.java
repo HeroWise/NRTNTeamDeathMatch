@@ -105,7 +105,9 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 					Bukkit.broadcastMessage(Utility.sendInfo("&aTime has been set to:&7 " + args[1] + " mins!"));
 
 					TeamDeathMatch.setTimeLimit(Integer.valueOf(args[1]));
+					counter = 1;
 					startTimer(TeamDeathMatch.getTimeLimit()); // Setting TImer
+					
 
 				}
 
@@ -121,16 +123,14 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 				 */
 				startTimer(TeamDeathMatch.getTimeLimit()); // Setting TImer
 															// value
-				sender.sendMessage(Utility.messageToPlayer("&aTeam Death Match has started!"));
-
+				sender.sendMessage(Utility.messageToPlayer("&a Team Death Match has started!"));
 				Bukkit.broadcastMessage(Utility
 						.decodeMessage("&l&a▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"));
 			
 				Bukkit.broadcastMessage(Utility.sendInfo(
-						"&c&lTeam Death Match\n&b ◈  A team based game where two teams fight for victory\n ◈  First to a certain amount of points win\n ◈  There is a time limit too, after a certaim time the team with the highest points win. \n ◈ If the points are equal, both teams draw!"));
+						"&c&lTeam Death Match\n&b ◈  A team based game where two teams fight for victory\n ◈  First to a certain amount of points win\n ◈  There is a time limit too, after a certaim time the team with the highest points win. \n ◈  If the points are equal, both teams draw!"));
 				Bukkit.broadcastMessage(Utility.sendInfo(
 						"&3There are certain procedures you need to do to join a game and have the best experience with:\n &8► &3Please initiate commands /tdm join to enter this round\n &8► &3You also need to initiate commands /fb toggle if you need to see scoreboard &7(&l&3Highly recommended&7)"));
-
 				Bukkit.broadcastMessage(Utility
 						.decodeMessage("&l&a▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"));
 				
@@ -155,14 +155,18 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 				: (s < 10 && (h > 0 || m > 0) ? "0" : "") + String.valueOf(s) + " " + "s");
 		return sh + (h > 0 ? " " : "") + sm + (m > 0 ? " " : "") + ss;
 	}
-
+	int counter = 0;
 	public void startTimer(int minutes) {
 		numberOfSeconds = minutes * 60;
 		new BukkitRunnable() {
 
 			@Override
 			public void run() {
-
+				if(counter==1){
+					counter=0;
+					this.cancel();
+					
+				}
 				for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
 
 					int seconds = numberOfSeconds;
