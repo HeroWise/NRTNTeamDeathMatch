@@ -20,10 +20,8 @@ public class GameManager {
 	public static boolean checkIfGameWon() {
 
 		if (TeamDeathMatch.getRedPoints() >= TeamDeathMatch.getTotalPoints() && TeamDeathMatch.isGameRunning()) {
-			Bukkit.broadcastMessage(Utility.decodeMessage("&l&a▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"));
-
-			Bukkit.broadcastMessage(Utility.sendInfo(("&c&lRed Team&a has claimed victory!")));
-			Bukkit.broadcastMessage(Utility.sendInfo("&c&lRed Team &aincluded:"));
+			Bukkit.broadcastMessage(Utility.decodeMessage("&c&lRed Team&a has claimed victory!"));
+			Bukkit.broadcastMessage(Utility.decodeMessage("&c&lRed Team &aincluded:"));
 			for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
 
 				Bukkit.broadcastMessage(Utility.decodeMessage(
@@ -31,8 +29,6 @@ public class GameManager {
 			
 
 			}
-			Bukkit.broadcastMessage(Utility.decodeMessage("&l&a▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"));
-
 			for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
 				BarAPI.removeBar(p);
 				// ScoreboardUtil.unrankedSidebarDisplay(p, new String[] {});
@@ -45,10 +41,8 @@ public class GameManager {
 			TeamDeathMatch.stopGame();
 			return true;
 		} else if (TeamDeathMatch.getBluePoints() >= TeamDeathMatch.getTotalPoints() && TeamDeathMatch.isGameRunning()) {
-			Bukkit.broadcastMessage(Utility.decodeMessage((("&l&a▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"))));
-
-			Bukkit.broadcastMessage(Utility.sendInfo(("&b&lBlue Team&a has claimed victory!")));
-			Bukkit.broadcastMessage(Utility.sendInfo(("&b&lBlue Team &aincluded:")));
+			Bukkit.broadcastMessage(Utility.decodeMessage("&b&lBlue Team&a has claimed victory!"));
+			Bukkit.broadcastMessage(Utility.decodeMessage("&b&lBlue Team &aincluded:"));
 			for (Player p : TeamDeathMatch.getPlayersInBlueTeam()) {
 
 				Bukkit.broadcastMessage(Utility.decodeMessage(
@@ -56,8 +50,7 @@ public class GameManager {
 			
 			}
 
-			Bukkit.broadcastMessage(Utility.decodeMessage("&l&a▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"));
-
+		
 			for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
 				BarAPI.removeBar(p);
 				// ScoreboardUtil.unrankedSidebarDisplay(p, new String[] {});

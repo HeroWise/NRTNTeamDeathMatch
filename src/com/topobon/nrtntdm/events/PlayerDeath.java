@@ -1,47 +1,20 @@
 package com.topobon.nrtntdm.events;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Field;
-import java.net.URL;
-import java.util.Collection;
-import java.util.UUID;
-
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerChatEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.mojang.authlib.GameProfile;
 import com.topobon.nrtntdm.TeamDeathMatch;
 import com.topobon.nrtntdm.TeamDeathMatchNRTN;
 import com.topobon.nrtntdm.arena.LocationManager;
 import com.topobon.nrtntdm.arena.TDMLocation;
 import com.topobon.nrtntdm.utils.Utility;
 
-import org.bukkit.craftbukkit.v1_10_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_10_R1.entity.CraftPlayer;
-import com.mojang.authlib.properties.Property;
-
-import net.minecraft.server.v1_10_R1.ChatComponentText;
-import net.minecraft.server.v1_10_R1.EntityPlayer;
-import net.minecraft.server.v1_10_R1.MinecraftServer;
-import net.minecraft.server.v1_10_R1.PacketPlayOutPlayerInfo;
-import net.minecraft.server.v1_10_R1.PacketPlayOutPlayerInfo.EnumPlayerInfoAction;
-import net.minecraft.server.v1_10_R1.PacketPlayOutPlayerListHeaderFooter;
-import net.minecraft.server.v1_10_R1.PlayerInteractManager;
-import net.minecraft.server.v1_10_R1.WorldServer;
+import me.winterguardian.easyscoreboards.ScoreboardUtil;
 
 public class PlayerDeath implements Listener {
 
@@ -53,7 +26,6 @@ public class PlayerDeath implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void playerRespawn(PlayerRespawnEvent e) {
-
 		Player player = e.getPlayer();
 		// Check if game is runningS
 		if (TeamDeathMatch.isGameRunning()) {
@@ -102,7 +74,6 @@ public class PlayerDeath implements Listener {
 				Bukkit.broadcastMessage(
 						Utility.messageToPlayer("&b&l" + killedPlayer.getDisplayName() + "&a has been killed by &c&l"
 								+ killer.getDisplayName() + "! &l+1&a points have been added to &4&lRed Team&a!"));
-
 				TeamDeathMatch.setRedPoints(TeamDeathMatch.getRedPoints() + 1);
 				TeamDeathMatch.setIndividualPlayerKills(killer,
 						TeamDeathMatch.getIndividualPlayerKills().get(killer) + 1);

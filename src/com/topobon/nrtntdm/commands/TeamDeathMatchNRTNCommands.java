@@ -67,44 +67,21 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 
 			if (args.length > 0) {
 			
-				
-				if (args[0].equalsIgnoreCase("start") && (!TeamDeathMatch.isGameRunning()) && sender.hasPermission("tdm.nrtn") || sender.isOp()) {
-					TeamDeathMatch.startGame();
-
-					TeamDeathMatchNRTN.setGameInfo();
-
-					/**
-					 * Setting Timer in minutes
-					 */
-					startTimer(TeamDeathMatch.getTimeLimit()); // Setting TImer
-																// value
-					sender.sendMessage(Utility.messageToPlayer("&aTeam Death Match has started!"));
-
-					Bukkit.broadcastMessage(Utility
-							.decodeMessage("&l&a▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"));
-				
-					Bukkit.broadcastMessage(Utility.sendInfo(
-							"&c&lTeam Death Match\n&b ◈  A team based game where two teams fight for victory\n ◈  First to a certain amount of points win\n ◈  There is a time limit too, after a certaim time the team with the highest points win. \n ◈ If the points are equal, both teams draw!"));
-					Bukkit.broadcastMessage(Utility.sendInfo(
-							"&3There are certain procedures you need to do to join a game and have the best experience with:\n &8► &3Please initiate commands /tdm join to enter this round\n &8► &3You also need to initiate commands /fb toggle if you need to see scoreboard &7(&l&3Highly recommended&7)"));
-
-					Bukkit.broadcastMessage(Utility
-							.decodeMessage("&l&a▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"));
-					
-				}
+		
 				if (args[0].equalsIgnoreCase("join") && (TeamDeathMatch.isGameRunning()) && sender instanceof Player) {
 					Player pSender = (Player) sender;
+					System.out.println("test");
 					QueueProcess.setPlayerInQueue(pSender);
 					
 				}
-				if (args[0].equalsIgnoreCase("stop") && (TeamDeathMatch.isGameRunning()) && sender.hasPermission("tdm.nrtn") || sender.isOp()) {
+				if (args[0].equalsIgnoreCase("stop") && (TeamDeathMatch.isGameRunning()) && sender.hasPermission("tdm.nrtn")) {
 					TeamDeathMatch.stopGame();
 					sender.sendMessage(Utility.messageToPlayer("&aTeam Death Match has stopped!"));
 					
 				}
 				
 				if (args[0].equalsIgnoreCase("setscore") && (TeamDeathMatch.isGameRunning()) && sender instanceof Player
-						&& sender.hasPermission("tdm.nrtn") || sender.isOp()) {
+						&& sender.hasPermission("tdm.nrtn")) {
 					Player pSender = (Player) sender;
 					Bukkit.broadcastMessage(Utility.sendInfo("&aScore has been set to:&7 " + args[1] + "! You now need " +args[1]+" total points to win!"));
 					TeamDeathMatch.setTotalPoints(Integer.valueOf(args[1]));
@@ -132,8 +109,32 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 
 				}
 
-			}
+			
+			
+			if (args[0].equalsIgnoreCase("start") && (!TeamDeathMatch.isGameRunning()) && sender.hasPermission("tdm.nrtn")) {
+				TeamDeathMatch.startGame();
 
+				TeamDeathMatchNRTN.setGameInfo();
+
+				/**
+				 * Setting Timer in minutes
+				 */
+				startTimer(TeamDeathMatch.getTimeLimit()); // Setting TImer
+															// value
+				sender.sendMessage(Utility.messageToPlayer("&aTeam Death Match has started!"));
+
+				Bukkit.broadcastMessage(Utility
+						.decodeMessage("&l&a▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"));
+			
+				Bukkit.broadcastMessage(Utility.sendInfo(
+						"&c&lTeam Death Match\n&b ◈  A team based game where two teams fight for victory\n ◈  First to a certain amount of points win\n ◈  There is a time limit too, after a certaim time the team with the highest points win. \n ◈ If the points are equal, both teams draw!"));
+				Bukkit.broadcastMessage(Utility.sendInfo(
+						"&3There are certain procedures you need to do to join a game and have the best experience with:\n &8► &3Please initiate commands /tdm join to enter this round\n &8► &3You also need to initiate commands /fb toggle if you need to see scoreboard &7(&l&3Highly recommended&7)"));
+
+				Bukkit.broadcastMessage(Utility
+						.decodeMessage("&l&a▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"));
+				
+			}}
 		}
 		return true;
 	}

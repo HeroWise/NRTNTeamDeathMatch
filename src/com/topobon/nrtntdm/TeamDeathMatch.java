@@ -148,10 +148,8 @@ public class TeamDeathMatch {
 	 * 
 	 * @param player
 	 */
-	private static void removePlayerInBlueTeam(Player player) {
+	public void removePlayerInBlueTeam(Player player) {
 		teamBlue.remove(player);
-		playerKills.remove(player);
-		playerDeaths.remove(player);
 	}
 
 	/**
@@ -159,20 +157,21 @@ public class TeamDeathMatch {
 	 * 
 	 * @param player
 	 */
-	private static void removePlayerInRedTeam(Player player) {
+	public void removePlayerInRedTeam(Player player) {
 		teamRed.remove(player);
-		playerKills.remove(player);
-		playerDeaths.remove(player);
 	}
 
 	public static void removePlayerFromGame(Player player) {
-		if (getPlayersInBlueTeam().contains(player)) {
-			removePlayerInBlueTeam(player);
-		}
-		if (getPlayersInRedTeam().contains(player)) {
-			removePlayerInRedTeam(player);
-		}
+		if (teamBlue.contains(player)) {
+			teamBlue.remove(player);
+			playerKills.remove(player);
+			playerDeaths.remove(player);
+		} else {
+			teamRed.remove(player);
+			playerKills.remove(player);
+			playerDeaths.remove(player);
 
+		}
 	}
 
 	/**
@@ -347,11 +346,9 @@ public class TeamDeathMatch {
 	 */
 	public static Sidebar getBlueSideBar(Player p) {
 
-		SidebarString line1 = new SidebarString(
-				Utility.decodeMessage("&0|&3Win Score&7:&4 " + TeamDeathMatch.getTotalPoints()));
-
-		SidebarString line21 = new SidebarString(
+		SidebarString line2 = new SidebarString(
 				Utility.decodeMessage("&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()));
+
 		SidebarString line3 = new SidebarString(
 				Utility.decodeMessage("&0|&4Red Team Kills&7:&4 " + TeamDeathMatch.getRedPoints()));
 		SidebarString line4 = new SidebarString(
@@ -360,17 +357,15 @@ public class TeamDeathMatch {
 				Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(p)));
 		SidebarString line6 = new SidebarString(Utility.decodeMessage("&8&m&l----------"));
 
-		Sidebar mySidebar = new Sidebar(Utility.decodeMessage("&b&lTeam Death Match"), instance, 20,line1,line21, line3,
+		Sidebar mySidebar = new Sidebar(Utility.decodeMessage("&b&lTeam Death Match"), instance, 20, line2, line3,
 				line4, line5, line6);
 
 		return mySidebar;
 	}
 
 	public static Sidebar getRedSideBar(Player p) {
-		SidebarString line1 = new SidebarString(
-				Utility.decodeMessage("&0|&3Win Score7&:&4 " + TeamDeathMatch.getTotalPoints()));
-	
-		SidebarString line21 = new SidebarString(
+
+		SidebarString line2 = new SidebarString(
 				Utility.decodeMessage("&0|&1Blue Team Kills&7:&4 " + TeamDeathMatch.getBluePoints()));
 
 		SidebarString line3 = new SidebarString(
@@ -381,7 +376,7 @@ public class TeamDeathMatch {
 				Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(p)));
 		SidebarString line6 = new SidebarString(Utility.decodeMessage("&8&m&l----------"));
 
-		Sidebar mySidebar = new Sidebar(Utility.decodeMessage("&c&lTeam Death Match"), instance, 20, line1, line3, line21,
+		Sidebar mySidebar = new Sidebar(Utility.decodeMessage("&c&lTeam Death Match"), instance, 20, line3, line2,
 				line4, line5, line6);
 
 		return mySidebar;

@@ -61,8 +61,9 @@ import com.topobon.nrtntdm.gameprocessing.GameManager;
  */
 public class TeamDeathMatchNRTN extends JavaPlugin {
 	private static Logo logo; // Logo object
-
-	private static Logo infoLogo;
+	
+	
+	
 	
 	/**
 	 * Method: Calls when class runs {@link #getPluginLoader()}
@@ -81,7 +82,6 @@ public class TeamDeathMatchNRTN extends JavaPlugin {
 		new TeamDeathMatch(this);
 		new GameManager(this);
 		setLogo(ChatColor.translateAlternateColorCodes('&', "&7&l[&6&lNaruto &c&lRTN&7&l] &r"));
-		setInfoLogo(ChatColor.translateAlternateColorCodes('&', "&8&l[&6Info&8&l] &r"));
 		/**
 		 * Talks about the TDM plugin and its state
 		 * 
@@ -124,30 +124,13 @@ public class TeamDeathMatchNRTN extends JavaPlugin {
 		
 		return logo.getLogo();
 	}
-	/**
-	 * Method: returns logo Object and calls #getLogo() 
-	 * Method from the {@linkplain Logo.class}
-	 *  
-	 * @return Logo Object to #getLogo()  
-	 */
-	public static String getInfoInitials(){
-		
-		return infoLogo.getLogo();
-	}
+	
 	/**
 	 * 
 	 * @param string - to set Logo
 	 */
 	public static void setLogo(String string){
 		logo = new Logo(string);
-	}
-	
-	/**
-	 * 
-	 * @param string - to set Logo
-	 */
-	public static void setInfoLogo(String string){
-		infoLogo = new Logo(string);
 	}
 	
 }

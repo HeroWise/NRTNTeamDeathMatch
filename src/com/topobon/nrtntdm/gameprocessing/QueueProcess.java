@@ -68,12 +68,6 @@ public class QueueProcess {
 			TeamDeathMatch.getBlueSideBar(player).showTo(player);
 			TeamDeathMatch.addPlayerInBlueTeam(player);
 			player.sendMessage(Utility.messageToPlayer("&aYou have joined &b&lBlue&a Team!"));
-			for (Player p : TeamDeathMatch.getPlayersInBlueTeam()) {
-				p.sendMessage(Utility.sendInfo("&b"+ player.getName() + " &a has joined &bBlue Team!"));
-			}
-			for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
-				p.sendMessage(Utility.sendInfo("&b"+ player.getName() + " &a has joined &bBlue Team!"));
-			}
 			TDMLocation.teleportPlayerToTeamBlueSpawn(player);
 
 		} else {
@@ -83,12 +77,6 @@ public class QueueProcess {
 			TeamDeathMatch.addPlayerInRedTeam(player);
 			TeamDeathMatch.getRedSideBar(player).showTo(player);
 			player.sendMessage(Utility.messageToPlayer("&aYou have joined &c&lRed&a Team!"));
-			for (Player p : TeamDeathMatch.getPlayersInBlueTeam()) {
-				p.sendMessage(Utility.sendInfo("&b"+ player.getName() + " &a has joined &cRed Team!"));
-			}
-			for (Player p : TeamDeathMatch.getPlayersInRedTeam()) {
-				p.sendMessage(Utility.sendInfo("&c"+ player.getName() + " &a has joined &cRed Team!"));
-			}
 			TDMLocation.teleportPlayerToTeamRedSpawn(player);
 
 		}
