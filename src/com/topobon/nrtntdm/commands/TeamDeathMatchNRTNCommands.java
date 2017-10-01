@@ -100,7 +100,7 @@ public class TeamDeathMatchNRTNCommands implements CommandExecutor {
 
 				}
 				if (args[0].equalsIgnoreCase("timelimit") && (TeamDeathMatch.isGameRunning())
-						&& sender instanceof Player && sender.isOp()) {
+						&& sender instanceof Player && sender.hasPermission("tdm.nrtn")) {
 
 					Bukkit.broadcastMessage(Utility.sendInfo("&aTime has been set to:&7 " + args[1] + " mins!"));
 
