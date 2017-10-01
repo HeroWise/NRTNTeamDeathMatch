@@ -29,7 +29,7 @@ public class GameManager {
 				Bukkit.broadcastMessage(Utility.decodeMessage(
 						"&a◇&c " + p.getName() + " &8- &aKills: " + TeamDeathMatch.getIndividualPlayerKills().get(p)));
 			
-
+				TeamDeathMatch.givePlayerRewards(p);	
 			}
 			Bukkit.broadcastMessage(Utility
 					.decodeMessage("&l&a▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"));
@@ -53,7 +53,7 @@ public class GameManager {
 
 				Bukkit.broadcastMessage(Utility.decodeMessage(
 						"&a◇&b " + p.getName() + " &8- &aKills: " + TeamDeathMatch.getIndividualPlayerKills().get(p)));
-			
+				TeamDeathMatch.givePlayerRewards(p);
 			}
 
 			Bukkit.broadcastMessage(Utility
@@ -85,7 +85,7 @@ public class GameManager {
 				Bukkit.broadcastMessage(Utility.decodeMessage("&c&lRed Team &aincluded:"));
 				Bukkit.broadcastMessage(Utility.decodeMessage(
 						"&a◇&c " + p.getName() + " &8- &aKills: " + TeamDeathMatch.getIndividualPlayerKills().get(p)));
-				
+				TeamDeathMatch.givePlayerRewards(p);
 				p.sendMessage(Utility.messageToPlayer("&bJust removing your sins...Steel is my body Fire is my Blood"));
 				p.setHealth(0);
 			}
@@ -103,6 +103,7 @@ public class GameManager {
 			
 				Bukkit.broadcastMessage(Utility.decodeMessage(
 						"&a◇&b " + p.getName() + " &8- &aKills: " + TeamDeathMatch.getIndividualPlayerKills().get(p)));
+				TeamDeathMatch.givePlayerRewards(p);
 				p.sendMessage(Utility.messageToPlayer("&bJust removing your sins...Steel is my body Fire is my Blood"));
 				p.setHealth(0);
 			} 

@@ -49,7 +49,13 @@ package com.topobon.nrtntdm;
  * 
  */
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.bukkit.Bukkit;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import com.coloredcarrot.api.sidebar.Sidebar;
@@ -337,6 +343,42 @@ public class TeamDeathMatch {
 		timeLimit = timeInMinutes;
 	}
 
+	public static void givePlayerRewards(Player player) {
+
+		ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+		String command = "battlelevels addscore " + player + " 10";
+		Bukkit.dispatchCommand(console, command);
+		command = "mi give custom CrateKey " + player + " 1";
+		Bukkit.dispatchCommand(console, command);
+
+		Player highestKillsPlayer = getMaxEntry(getIndividualPlayerKills()).getKey();
+		if (highestKillsPlayer == player) {
+			player.sendMessage(Utility.messageToPlayer(
+					"&aDue to having the highest number of kills and participation, you are getting extra rewards!"));
+			command = "eco give " + player + " 2000";
+			Bukkit.dispatchCommand(console, command);
+		}
+	}
+
+	/**
+	 * Method: Get Max Entry
+	 * 
+	 * @param hashMap
+	 * @return
+	 */
+	public static Entry<Player, Integer> getMaxEntry(HashMap<Player, Integer> hashMap) {
+		Entry<Player, Integer> maxEntry = null;
+		Integer max = Collections.max(hashMap.values());
+
+		for (Entry<Player, Integer> entry : hashMap.entrySet()) {
+			Integer value = entry.getValue();
+			if (null != value && max == value) {
+				maxEntry = entry;
+			}
+		}
+		return maxEntry;
+	}
+
 	/**
 	 * Tentative
 	 * 
@@ -358,8 +400,8 @@ public class TeamDeathMatch {
 				Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(p)));
 		SidebarString line6 = new SidebarString(Utility.decodeMessage("&8&m&l----------"));
 
-		Sidebar mySidebar = new Sidebar(Utility.decodeMessage("&b&lTeam Death Match"), instance, 20, line1, line2, line3,
-				line4, line5, line6);
+		Sidebar mySidebar = new Sidebar(Utility.decodeMessage("&b&lTeam Death Match"), instance, 20, line1, line2,
+				line3, line4, line5, line6);
 
 		return mySidebar;
 	}
@@ -378,8 +420,8 @@ public class TeamDeathMatch {
 				Utility.decodeMessage("&0|&aDeaths&7:&4 " + TeamDeathMatch.getIndividualPlayerDeaths().get(p)));
 		SidebarString line6 = new SidebarString(Utility.decodeMessage("&8&m&l----------"));
 
-		Sidebar mySidebar = new Sidebar(Utility.decodeMessage("&c&lTeam Death Match"), instance, 20, line1,line3, line2,
-				line4, line5, line6);
+		Sidebar mySidebar = new Sidebar(Utility.decodeMessage("&c&lTeam Death Match"), instance, 20, line1, line3,
+				line2, line4, line5, line6);
 
 		return mySidebar;
 	}
